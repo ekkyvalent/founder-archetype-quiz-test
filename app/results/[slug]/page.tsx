@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { headers } from 'next/headers';
 import type { Metadata } from 'next';
 
 import { getArchetypeBySlug, allArchetypeSlugs } from '@/lib/archetypes';
@@ -22,7 +23,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: 'Not Found | Aspire Founder Quiz' };
   }
 
-  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://aspireapp.com/founder-archetype-quiz';
+  // Auto-detect origin so OG images work on any environment (Vercel preview, prod, local)
+  const headersList = headers();
+  const host = headersList.get('host') ?? 'aspireapp.com';
+  const protocol = host.includes('localhost') ? 'http' : 'https';
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? `${protocol}://${host}`;
   const ogImageUrl = `${BASE_URL}/api/og?archetype=${params.slug}`;
   const pageUrl = `${BASE_URL}/results/${params.slug}`;
 
