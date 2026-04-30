@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     siteName: 'Aspire',
     images: [
       {
-        url: '/api/og',
+        url: '/og/default.png',
         width: 1200,
         height: 630,
         alt: 'Aspire Founder Archetype Quiz',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'What kind of founder are you? | Aspire',
     description: 'Discover your founder archetype and the Aspire products built for you.',
-    images: ['/api/og'],
+    images: ['/og/default.png'],
   },
 };
 
