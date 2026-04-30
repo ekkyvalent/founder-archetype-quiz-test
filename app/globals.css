@@ -1,0 +1,155 @@
+/* ── Fonts ──────────────────────────────────────────────────────
+   Satoshi (display) loaded via Fontshare in layout.tsx <head>.
+   Inter (body) loaded via Google Fonts in layout.tsx <head>.
+   ─────────────────────────────────────────────────────────────── */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-mint: #00D395;
+    --color-near-black: #141414;
+    --color-charcoal: #3C3C3C;
+    --color-cloud: #F0F0EB;
+    --color-mint-tint: #C8F5E3;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #141414;
+    color: #ffffff;
+  }
+
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* ── Custom Animations ──────────────────────────────────────── */
+@layer utilities {
+
+  /* Fade up from slight offset — used for staggered text reveals */
+  .animate-fade-up {
+    animation: fadeUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  /* Scan line that sweeps down — used on landing hero */
+  .animate-scan {
+    animation: scan 3s ease-in-out infinite;
+  }
+
+  /* Subtle pulse on the current dot in progress tracker */
+  .animate-dot-pulse {
+    animation: dotPulse 1.6s ease-in-out infinite;
+  }
+
+  /* Binary digit appear — used in results reveal */
+  .animate-digit-appear {
+    animation: digitAppear 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  /* Grain/noise overlay for background texture */
+  .noise-overlay::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.4;
+  }
+
+  /* Card selection shimmer */
+  .card-shimmer {
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgba(0, 211, 149, 0.06) 50%,
+      transparent 60%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scan {
+  0%, 100% {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  95% {
+    transform: translateY(calc(100vh + 10px));
+    opacity: 0;
+  }
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.7;
+  }
+}
+
+@keyframes digitAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+/* ── Binary background pattern ──────────────────────────────── */
+.binary-bg {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 39px,
+    rgba(255, 255, 255, 0.015) 39px,
+    rgba(255, 255, 255, 0.015) 40px
+  );
+}
+
+/* ── Option card hover glow ─────────────────────────────────── */
+.option-card-glow:hover {
+  box-shadow: 0 0 0 1px rgba(0, 211, 149, 0.4), 0 0 20px rgba(0, 211, 149, 0.06);
+}
+
+.option-card-selected {
+  box-shadow: 0 0 0 1.5px #00D395, 0 0 24px rgba(0, 211, 149, 0.12);
+}
