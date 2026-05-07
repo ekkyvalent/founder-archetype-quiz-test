@@ -48,7 +48,7 @@ type CardFrameProps = {
 };
 
 // Illustration area min-height by size
-const illoMinH = { sm: '130px', md: '200px', lg: '180px' };
+const illoMinH = { sm: '110px', md: '160px', lg: '155px' };
 
 export default function CardFrame({
   illustration,
@@ -63,10 +63,10 @@ export default function CardFrame({
 
   const sizeClass =
     size === 'lg'
-      ? 'w-[220px] min-h-[340px]'
+      ? 'w-[220px] min-h-[308px]'          // 220 × 7/5 = 308 — true poker card ratio
       : size === 'md'
-      ? 'w-full min-h-[340px]'   // same height as lg, full-width
-      : 'w-full min-h-[240px]';
+      ? 'w-full aspect-[5/7] min-h-[280px]' // responsive 5:7 at any width
+      : 'w-full min-h-[214px]';
 
   return (
     <motion.div
