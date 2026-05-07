@@ -49,7 +49,7 @@ export const questions: Question[] = [
     options: [
       {
         id: 'q1-a',
-        label: 'Review internal systems and unit economics to ensure your foundation is break-proof.',
+        label: 'Ignore the noise and stay the course on your original, long-horizon roadmap.',
         value: 0,
       },
       {
@@ -72,7 +72,7 @@ export const questions: Question[] = [
       },
       {
         id: 'q2-b',
-        label: 'Look for a consensus that aligns with your core company values.',
+        label: 'Look for a consensus within the leadership team to ensure alignment with your core company values.',
         value: 1,
       },
     ],
@@ -85,12 +85,12 @@ export const questions: Question[] = [
     options: [
       {
         id: 'q3-a',
-        label: 'Shore up your balance sheet to maximise long-term control.',
+        label: 'Spend sustainably to extend runway and focus on profitability.',
         value: 0,
       },
       {
         id: 'q3-b',
-        label: 'Deploy it immediately into aggressive customer acquisition.',
+        label: 'Double down on growth to win the market quickly.',
         value: 1,
       },
     ],
@@ -109,12 +109,12 @@ export const questions: Question[] = [
     options: [
       {
         id: 'q4-a',
-        label: 'Rely on your personal conviction and vision for the future.',
+        label: 'Wait for more clarity or reduce risk before committing.',
         value: 0,
       },
       {
         id: 'q4-b',
-        label: 'Lean on established principles and safety frameworks to guide the path.',
+        label: 'Commit early and course-correct if needed.',
         value: 1,
       },
     ],
@@ -123,16 +123,16 @@ export const questions: Question[] = [
   // ── Q5 — Modifier ────────────────────────────────────────────
   {
     id: 'q5',
-    text: 'When it comes to hiring, what is your non-negotiable trait?',
+    text: 'When it comes to hiring, what are you looking for?',
     options: [
       {
         id: 'q5-a',
-        label: 'Finding "believers" who will work toward an impossible future.',
+        label: 'Proven operators who can execute immediately and drive results.',
         value: 0,
       },
       {
         id: 'q5-b',
-        label: 'Finding "operators" who prioritise efficiency and repeatable systems.',
+        label: 'People who believe in the vision and will grow with it.',
         value: 1,
       },
     ],
@@ -145,12 +145,12 @@ export const questions: Question[] = [
     options: [
       {
         id: 'q6-a',
-        label: 'Delay the launch to ensure the product meets your internal standards of craft.',
+        label: 'Rally the team, reset priorities, and push through a focused release.',
         value: 0,
       },
       {
         id: 'q6-b',
-        label: 'Cut the scope and ship the minimum viable version today.',
+        label: 'Ship lean and iterate as you go.',
         value: 1,
       },
     ],
@@ -159,7 +159,7 @@ export const questions: Question[] = [
   // ── Q7 — ANCHOR 3: Scale ─────────────────────────────────────
   {
     id: 'q7',
-    text: 'What does scale look like to you in the next 12 months?',
+    text: 'What does success look like to you in the next 12 months?',
     anchor: {
       digitIndex: 2,
       dimension: 'Scale',
@@ -169,12 +169,12 @@ export const questions: Question[] = [
     options: [
       {
         id: 'q7-a',
-        label: 'Staying lean and maintaining extreme talent density with a small team.',
+        label: 'We\'ve built a more resilient business with strong foundations for long-term growth.',
         value: 0,
       },
       {
         id: 'q7-b',
-        label: 'Expanding your footprint rapidly across multiple global markets.',
+        label: 'We\'ve moved faster than competitors and captured meaningful market share.',
         value: 1,
       },
     ],
@@ -187,12 +187,12 @@ export const questions: Question[] = [
     options: [
       {
         id: 'q8-a',
-        label: 'A tool to expand human exploration and creative judgment.',
+        label: 'A tool we adopt selectively with clear guidelines for tangible outcomes.',
         value: 0,
       },
       {
         id: 'q8-b',
-        label: 'A way to automate every friction point and shock the organisation into higher output.',
+        label: 'A strategic lever we push aggressively to move faster and stay ahead.',
         value: 1,
       },
     ],
@@ -201,16 +201,16 @@ export const questions: Question[] = [
   // ── Q9 — Modifier ────────────────────────────────────────────
   {
     id: 'q9',
-    text: 'A top-tier investor suggests a move that doubles revenue but dilutes your brand taste. Do you take it?',
+    text: 'A top-tier investor suggests a move that increases revenue but may conflict with your long-term vision. How do you respond?',
     options: [
       {
         id: 'q9-a',
-        label: 'No — consistency and brand integrity are your primary moats.',
+        label: 'Explore it selectively — test the upside while protecting your long-term direction.',
         value: 0,
       },
       {
         id: 'q9-b',
-        label: 'Yes — growth is the ultimate validation of your business model.',
+        label: 'Hold the line while finding ways to adapt and align it with your long-term goals.',
         value: 1,
       },
     ],
@@ -223,12 +223,12 @@ export const questions: Question[] = [
     options: [
       {
         id: 'q10-a',
-        label: 'Unshakeable and visionary, even in total uncertainty.',
+        label: 'Structured and intentional — setting clear direction, priorities, and standards for the team.',
         value: 0,
       },
       {
         id: 'q10-b',
-        label: 'Disciplined and reliable, with a focus on sustainable growth.',
+        label: 'Bold and decisive — making calls quickly and rallying the team around them.',
         value: 1,
       },
     ],

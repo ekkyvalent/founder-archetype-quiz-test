@@ -8,14 +8,14 @@ import { ARCHETYPE_ILLOS_BY_SLUG } from '@/components/tarot/ArchetypeIllos';
 
 // Roman numeral for each archetype (I–VIII) by slug
 const ROMAN_NUMERALS: Record<string, string> = {
-  'stealth-architect':      'I',
-  'visionary-cartographer': 'II',
-  'product-perfectionist':  'III',
-  'global-guardian':        'IV',
-  'chaos-pilot':            'V',
-  'ai-monster':             'VI',
-  'high-velocity-tinkerer': 'VII',
-  'global-juggernaut':      'VIII',
+  'stealth-architect':    'I',
+  'visionary-pathfinder': 'II',
+  'product-purist':       'III',
+  'anchored-scaler':      'IV',
+  'hustler':              'V',
+  'solo-visionary':       'VI',
+  'tinkerer':             'VII',
+  'global-trailblazer':   'VIII',
 };
 
 type Props = {

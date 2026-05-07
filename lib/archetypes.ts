@@ -57,14 +57,14 @@ export const archetypes: Record<BinaryCode, Archetype> = {
     name: 'The Stealth Architect',
     tagline: 'You build in silence. Durability is the strategy.',
     badge: 'Stealth Architect',
-    dominantArchetype: 'Deliberate expander',
-    secondaryArchetypes: ['Conviction-led', 'Lean-operator'],
+    dominantArchetype: 'Pragmatic expander',
+    secondaryArchetypes: ['Steward of the future', 'Principle-led builder'],
     dna: { growth: 'deliberate', decisions: 'conviction', scale: 'lean' },
     description:
-      'You build in silence and optimise for durability. You are not interested in the hype cycle — you are interested in building a foundation that is statistically impossible to break. Your conviction is your north star, and your lean team is your competitive moat.',
+      'You build in silence and optimize for durability. You aren\'t interested in the hype cycle — you\'re interested in building a foundation that is statistically impossible to break.',
     peers: [
       { name: 'Melanie Perkins', company: 'Canva' },
-      { name: 'Anthony Tan', company: 'Grab' },
+      { name: 'Anthony Tan', company: 'Early stage - Grab' },
     ],
     productReasoning:
       'You build lean and deliberate — unnecessary overhead is a liability, not a feature. A clean business account with full visibility keeps your foundation airtight, while automated expense management ensures your lean operations never spring a leak.',
@@ -88,15 +88,15 @@ export const archetypes: Record<BinaryCode, Archetype> = {
   // Deliberate + Conviction-led + Global
   '001': {
     code: '001',
-    slug: 'visionary-cartographer',
-    name: 'The Visionary Cartographer',
+    slug: 'visionary-pathfinder',
+    name: 'The Visionary Pathfinder',
     tagline: 'A global vision. The patience to map it market by market.',
-    badge: 'Visionary Cartographer',
-    dominantArchetype: 'Deliberate expander',
-    secondaryArchetypes: ['Conviction-led', 'Global-first'],
+    badge: 'Visionary Pathfinder',
+    dominantArchetype: 'Pragmatic expander',
+    secondaryArchetypes: ['Steward of the future', 'Global-first'],
     dna: { growth: 'deliberate', decisions: 'conviction', scale: 'global' },
     description:
-      'You have a massive global vision but the patience to map it out market by market. You scale through surgical precision rather than raw force. Your conviction fuels the mission, and your deliberate expansion keeps the wheels from coming off at scale.',
+      'You have a massive global vision but the patience to map it out market by market. You scale through surgical precision rather than raw force.',
     peers: [
       { name: 'Patrick Collison', company: 'Stripe' },
       { name: 'Anthony Tan', company: 'Grab' },
@@ -107,31 +107,31 @@ export const archetypes: Record<BinaryCode, Archetype> = {
       {
         name: 'Aspire Multi-Currency Account',
         description: 'Hold, send, and receive in 30+ currencies. Lock in FX rates and avoid surprise fees as you expand market by market.',
-        url: `https://aspireapp.com/multi-currency?${BASE_UTM}&utm_content=visionary-cartographer`,
+        url: `https://aspireapp.com/multi-currency?${BASE_UTM}&utm_content=visionary-pathfinder`,
       },
       {
         name: 'Aspire International Transfers',
         description: 'Send money to 130+ countries at transparent rates. Your financial rails should match the ambition of your map.',
-        url: `https://aspireapp.com/transfers?${BASE_UTM}&utm_content=visionary-cartographer`,
+        url: `https://aspireapp.com/transfers?${BASE_UTM}&utm_content=visionary-pathfinder`,
       },
     ],
     ctaLabel: 'Open your multi-currency account',
-    ctaUrl: `https://aspireapp.com/register?${BASE_UTM}&utm_content=visionary-cartographer`,
+    ctaUrl: `https://aspireapp.com/register?${BASE_UTM}&utm_content=visionary-pathfinder`,
   },
 
   // ── 010: The Product Perfectionist ───────────────────────────
   // Deliberate + Principle-driven + Lean
   '010': {
     code: '010',
-    slug: 'product-perfectionist',
-    name: 'The Product Perfectionist',
+    slug: 'product-purist',
+    name: 'The Product Purist',
     tagline: 'Small team. High standards. The right thing, built right.',
-    badge: 'Product Perfectionist',
-    dominantArchetype: 'Principle-driven founder',
-    secondaryArchetypes: ['Deliberate expander', 'Lean-operator'],
+    badge: 'Product Purist',
+    dominantArchetype: 'Principle-led builder',
+    secondaryArchetypes: ['Pragmatic expander', 'Lean-operator'],
     dna: { growth: 'deliberate', decisions: 'principle', scale: 'lean' },
     description:
-      'You are guided by taste and principles. You would rather have a small, elite team building the right thing than a massive organisation building the noisy thing. Your principles are not a constraint — they are your quality control system.',
+      'You are guided by taste and principles. You would rather have a small, elite team building the right thing than a massive organization building the noisy thing.',
     peers: [
       { name: 'Dylan Field', company: 'Figma' },
     ],
@@ -141,31 +141,31 @@ export const archetypes: Record<BinaryCode, Archetype> = {
       {
         name: 'Aspire Business Account',
         description: 'A business account built for founders who hate unnecessary overhead. Clean, transparent, and totally in your control.',
-        url: `https://aspireapp.com/business-account?${BASE_UTM}&utm_content=product-perfectionist`,
+        url: `https://aspireapp.com/business-account?${BASE_UTM}&utm_content=product-purist`,
       },
       {
         name: 'Aspire Corporate Cards',
         description: 'Issue cards for your elite team with precise spending limits. Every transaction is visible in real time.',
-        url: `https://aspireapp.com/corporate-cards?${BASE_UTM}&utm_content=product-perfectionist`,
+        url: `https://aspireapp.com/corporate-cards?${BASE_UTM}&utm_content=product-purist`,
       },
     ],
     ctaLabel: 'Take control of team spending',
-    ctaUrl: `https://aspireapp.com/register?${BASE_UTM}&utm_content=product-perfectionist`,
+    ctaUrl: `https://aspireapp.com/register?${BASE_UTM}&utm_content=product-purist`,
   },
 
   // ── 011: The Global Guardian ──────────────────────────────────
   // Deliberate + Principle-driven + Global
   '011': {
     code: '011',
-    slug: 'global-guardian',
-    name: 'The Global Guardian',
+    slug: 'anchored-scaler',
+    name: 'The Anchored Scaler',
     tagline: 'Durable systems. Global trust. Built to last everywhere.',
-    badge: 'Global Guardian',
-    dominantArchetype: 'Deliberate expander',
-    secondaryArchetypes: ['Principle-driven', 'Global-first'],
+    badge: 'Anchored Scaler',
+    dominantArchetype: 'Pragmatic expander',
+    secondaryArchetypes: ['Principle-led builder', 'Global-first'],
     dna: { growth: 'deliberate', decisions: 'principle', scale: 'global' },
     description:
-      'You build durable, global systems that respect boundaries. You prioritise long-term stakeholder trust and operational rigour over short-term market wins. Your principles ensure that global scale does not come at the cost of integrity.',
+      'You build durable, global systems and stay true to your vision. You prioritize long-term stakeholder trust and operational rigor over short-term market wins.',
     peers: [
       { name: 'Sebastian Siemiatkowski', company: 'Klarna' },
       { name: 'Melanie Perkins', company: 'Canva' },
@@ -176,34 +176,34 @@ export const archetypes: Record<BinaryCode, Archetype> = {
       {
         name: 'Aspire Multi-Currency Account',
         description: 'Operate in 30+ currencies with institutional-grade visibility. The financial backbone for compliant global expansion.',
-        url: `https://aspireapp.com/multi-currency?${BASE_UTM}&utm_content=global-guardian`,
+        url: `https://aspireapp.com/multi-currency?${BASE_UTM}&utm_content=anchored-scaler`,
       },
       {
         name: 'Aspire Corporate Cards',
         description: 'Give global teams controlled spend access with real-time visibility across every market and entity.',
-        url: `https://aspireapp.com/corporate-cards?${BASE_UTM}&utm_content=global-guardian`,
+        url: `https://aspireapp.com/corporate-cards?${BASE_UTM}&utm_content=anchored-scaler`,
       },
     ],
     ctaLabel: 'Build your global financial stack',
-    ctaUrl: `https://aspireapp.com/register?${BASE_UTM}&utm_content=global-guardian`,
+    ctaUrl: `https://aspireapp.com/register?${BASE_UTM}&utm_content=anchored-scaler`,
   },
 
   // ── 100: The Chaos Pilot ──────────────────────────────────────
   // Speed-first + Conviction-led + Lean
   '100': {
     code: '100',
-    slug: 'chaos-pilot',
-    name: 'The Chaos Pilot',
+    slug: 'hustler',
+    name: 'The Hustler',
     tagline: 'Move fast. Trust your gut. Figure it out on the way up.',
-    badge: 'Chaos Pilot',
-    dominantArchetype: 'Speed-first expander',
-    secondaryArchetypes: ['Conviction-led', 'Lean-operator'],
+    badge: 'Hustler',
+    dominantArchetype: 'Speed-first operator',
+    secondaryArchetypes: ['Steward of the future', 'Lean-operator'],
     dna: { growth: 'speed', decisions: 'conviction', scale: 'lean' },
     description:
-      'You move fast and trust your gut. You are comfortable with messy organisational structures as long as the momentum is moving forward. Chaos is not a problem to solve — it is the environment you thrive in. Your lean setup keeps you nimble enough to pivot before anyone else sees the turn coming.',
+      'You move fast and trust your gut. You\'re comfortable with ambiguity and prioritise momentum.',
     peers: [
       { name: 'Alex Bouaziz', company: 'Deel' },
-      { name: 'Markus Villig', company: 'Bolt' },
+      { name: 'Markus Villig', company: 'Early stage - Bolt' },
     ],
     productReasoning:
       'You move at a pace where reimbursement cycles and approval bottlenecks are a real drag on momentum. A business account that is operational from day one and corporate cards for the team mean your people can spend when they need to — without waiting for a finance process to catch up with your speed.',
@@ -211,31 +211,31 @@ export const archetypes: Record<BinaryCode, Archetype> = {
       {
         name: 'Aspire Business Account',
         description: 'Open in minutes, operational from day one. No waiting, no paperwork purgatory — a business account that moves as fast as you do.',
-        url: `https://aspireapp.com/business-account?${BASE_UTM}&utm_content=chaos-pilot`,
+        url: `https://aspireapp.com/business-account?${BASE_UTM}&utm_content=hustler`,
       },
       {
         name: 'Aspire Corporate Cards',
         description: 'Give the team spend access without the reimbursement drag. Limits per card, real-time visibility, zero delays.',
-        url: `https://aspireapp.com/corporate-cards?${BASE_UTM}&utm_content=chaos-pilot`,
+        url: `https://aspireapp.com/corporate-cards?${BASE_UTM}&utm_content=hustler`,
       },
     ],
     ctaLabel: 'Open your business account',
-    ctaUrl: `https://aspireapp.com/register?${BASE_UTM}&utm_content=chaos-pilot`,
+    ctaUrl: `https://aspireapp.com/register?${BASE_UTM}&utm_content=hustler`,
   },
 
   // ── 101: The AI Monster ───────────────────────────────────────
   // Speed-first + Conviction-led + Global
   '101': {
     code: '101',
-    slug: 'ai-monster',
-    name: 'The AI Monster',
+    slug: 'solo-visionary',
+    name: 'The Solo Visionary',
     tagline: 'Building a future that doesn\'t exist yet — and getting there first.',
-    badge: 'AI Monster',
-    dominantArchetype: 'Conviction-led founder',
-    secondaryArchetypes: ['Speed-first', 'Global-first'],
+    badge: 'Solo Visionary',
+    dominantArchetype: 'Steward of the future',
+    secondaryArchetypes: ['Speed-first operator', 'Global-first'],
     dna: { growth: 'speed', decisions: 'conviction', scale: 'global' },
     description:
-      'You are building for a future that does not exist yet, and you are using every technological lever to get there first. You prioritise aggressive scale and unshakeable belief. AI is not a feature for you — it is the architecture. Global expansion is not a milestone, it is the baseline.',
+      'You are building for a future that doesn\'t exist yet, and you\'re using every technological lever to get there first. You prioritize aggressive scale and unshakeable belief.',
     peers: [
       { name: 'Sam Altman', company: 'OpenAI' },
       { name: 'Vlad Tenev', company: 'Robinhood' },
@@ -246,34 +246,34 @@ export const archetypes: Record<BinaryCode, Archetype> = {
       {
         name: 'Aspire Multi-Currency Account',
         description: 'Hold and move money in 30+ currencies from day one. Your company was always global — your banking should be too.',
-        url: `https://aspireapp.com/multi-currency?${BASE_UTM}&utm_content=ai-monster`,
+        url: `https://aspireapp.com/multi-currency?${BASE_UTM}&utm_content=solo-visionary`,
       },
       {
         name: 'Aspire Corporate Cards',
         description: 'Spend access for a fast-growing global team. Per-card limits and real-time visibility so speed never comes at the cost of control.',
-        url: `https://aspireapp.com/corporate-cards?${BASE_UTM}&utm_content=ai-monster`,
+        url: `https://aspireapp.com/corporate-cards?${BASE_UTM}&utm_content=solo-visionary`,
       },
     ],
     ctaLabel: 'Build your global financial stack',
-    ctaUrl: `https://aspireapp.com/register?${BASE_UTM}&utm_content=ai-monster`,
+    ctaUrl: `https://aspireapp.com/register?${BASE_UTM}&utm_content=solo-visionary`,
   },
 
   // ── 110: The High-Velocity Tinkerer ──────────────────────────
   // Speed-first + Principle-driven + Lean
   '110': {
     code: '110',
-    slug: 'high-velocity-tinkerer',
-    name: 'The High-Velocity Tinkerer',
+    slug: 'tinkerer',
+    name: 'The Tinkerer',
     tagline: 'Iterate constantly. Let principles keep the speed in check.',
-    badge: 'High-Velocity Tinkerer',
-    dominantArchetype: 'Speed-first expander',
-    secondaryArchetypes: ['Principle-driven', 'Lean-operator'],
+    badge: 'Tinkerer',
+    dominantArchetype: 'Speed-first operator',
+    secondaryArchetypes: ['Principle-led builder', 'Lean-operator'],
     dna: { growth: 'speed', decisions: 'principle', scale: 'lean' },
     description:
-      'You iterate constantly. You use clear principles to keep your speed in check, ensuring that every sprint moves in the right direction. Your lean team is a feature — not a constraint. Small enough to ship daily, principled enough to know when not to.',
+      'You iterate constantly. You use clear principles to keep your speed in check, ensuring that every sprint moves in the right direction.',
     peers: [
       { name: 'Tom Brown', company: 'Anthropic' },
-      { name: 'Dylan Field', company: 'Figma' },
+      { name: 'Dylan Field', company: 'Expansion stage - Figma' },
     ],
     productReasoning:
       'Every sprint counts, and admin between sprints is a tax on your output. Corporate cards with per-person limits keep the lean team moving without you approving every purchase, while automated expense management means receipts and reconciliation happen in the background — not on your desk.',
@@ -281,31 +281,31 @@ export const archetypes: Record<BinaryCode, Archetype> = {
       {
         name: 'Aspire Corporate Cards',
         description: 'Issue cards for your lean team with spend limits per person, per project. Ship fast without losing control of where the money goes.',
-        url: `https://aspireapp.com/corporate-cards?${BASE_UTM}&utm_content=high-velocity-tinkerer`,
+        url: `https://aspireapp.com/corporate-cards?${BASE_UTM}&utm_content=tinkerer`,
       },
       {
         name: 'Aspire Expense Management',
         description: 'Automate the admin between sprints. Real-time receipt capture and approval flows so your team never slows down to file expenses.',
-        url: `https://aspireapp.com/expense-management?${BASE_UTM}&utm_content=high-velocity-tinkerer`,
+        url: `https://aspireapp.com/expense-management?${BASE_UTM}&utm_content=tinkerer`,
       },
     ],
     ctaLabel: 'Give your team controlled spend access',
-    ctaUrl: `https://aspireapp.com/register?${BASE_UTM}&utm_content=high-velocity-tinkerer`,
+    ctaUrl: `https://aspireapp.com/register?${BASE_UTM}&utm_content=tinkerer`,
   },
 
   // ── 111: The Global Juggernaut ────────────────────────────────
   // Speed-first + Principle-driven + Global
   '111': {
     code: '111',
-    slug: 'global-juggernaut',
-    name: 'The Global Juggernaut',
+    slug: 'global-trailblazer',
+    name: 'The Global Trailblazer',
     tagline: 'Blitzscaling with principles. Capturing markets while others are still planning.',
-    badge: 'Global Juggernaut',
-    dominantArchetype: 'Speed-first expander',
-    secondaryArchetypes: ['Principle-driven', 'Global-first'],
+    badge: 'Global Trailblazer',
+    dominantArchetype: 'Speed-first operator',
+    secondaryArchetypes: ['Principle-led builder', 'Global-first'],
     dna: { growth: 'speed', decisions: 'principle', scale: 'global' },
     description:
-      'You are the ultimate blitzscaler. You use principles to scale judgment across massive, global teams — allowing you to capture entire markets while others are still in planning mode. Speed is your weapon. Principles are your guardrails. The world is your market.',
+      'You are the ultimate blitzscaler. You use principles to scale judgment across massive, global teams, allowing you to capture entire markets while others are still planning.',
     peers: [
       { name: 'Alex Bouaziz', company: 'Deel' },
       { name: 'Markus Villig', company: 'Bolt' },
@@ -316,16 +316,16 @@ export const archetypes: Record<BinaryCode, Archetype> = {
       {
         name: 'Aspire Multi-Currency Account',
         description: 'Operate in 30+ currencies with zero friction. The global financial backbone for a company that treats borders as logistics, not limits.',
-        url: `https://aspireapp.com/multi-currency?${BASE_UTM}&utm_content=global-juggernaut`,
+        url: `https://aspireapp.com/multi-currency?${BASE_UTM}&utm_content=global-trailblazer`,
       },
       {
         name: 'Aspire Corporate Cards',
         description: 'Spend control that scales with your headcount. Give every global team access with per-card limits and real-time visibility.',
-        url: `https://aspireapp.com/corporate-cards?${BASE_UTM}&utm_content=global-juggernaut`,
+        url: `https://aspireapp.com/corporate-cards?${BASE_UTM}&utm_content=global-trailblazer`,
       },
     ],
     ctaLabel: 'Build your global financial stack',
-    ctaUrl: `https://aspireapp.com/register?${BASE_UTM}&utm_content=global-juggernaut`,
+    ctaUrl: `https://aspireapp.com/register?${BASE_UTM}&utm_content=global-trailblazer`,
   },
 };
 

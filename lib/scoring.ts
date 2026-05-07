@@ -36,7 +36,7 @@ function getAnchorBit(answers: Answers, questionId: string): 0 | 1 {
  * Convert answers map → 3-bit binary string → archetype slug.
  *
  * @example
- * // User answered Q1=A, Q4=B, Q7=B → '011' → 'global-guardian'
+ * // User answered Q1=A, Q4=B, Q7=B → '011' → 'anchored-scaler'
  * calculateArchetype({ q1: 'q1-a', q4: 'q4-b', q7: 'q7-b' })
  */
 export function calculateArchetype(answers: Answers): string {

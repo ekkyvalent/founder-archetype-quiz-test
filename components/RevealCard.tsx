@@ -7,14 +7,14 @@ import { ARCHETYPE_ILLOS_BY_SLUG } from '@/components/tarot/ArchetypeIllos';
 
 // ── Roman numerals ───────────────────────────────────────────────
 const ROMAN: Record<string, string> = {
-  'stealth-architect':      'I',
-  'visionary-cartographer': 'II',
-  'product-perfectionist':  'III',
-  'global-guardian':        'IV',
-  'chaos-pilot':            'V',
-  'ai-monster':             'VI',
-  'high-velocity-tinkerer': 'VII',
-  'global-juggernaut':      'VIII',
+  'stealth-architect':    'I',
+  'visionary-pathfinder': 'II',
+  'product-purist':       'III',
+  'anchored-scaler':      'IV',
+  'hustler':              'V',
+  'solo-visionary':       'VI',
+  'tinkerer':             'VII',
+  'global-trailblazer':   'VIII',
 };
 
 // ── Shared corner ornament ───────────────────────────────────────

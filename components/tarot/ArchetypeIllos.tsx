@@ -481,12 +481,12 @@ export const ARCHETYPE_ILLOS: Record<string, React.FC> = {
 
 // Also expose by slug for convenience
 export const ARCHETYPE_ILLOS_BY_SLUG: Record<string, React.FC> = {
-  'stealth-architect':       Illo000,
-  'visionary-cartographer':  Illo001,
-  'product-perfectionist':   Illo010,
-  'global-guardian':         Illo011,
-  'chaos-pilot':             Illo100,
-  'ai-monster':              Illo101,
-  'high-velocity-tinkerer':  Illo110,
-  'global-juggernaut':       Illo111,
+  'stealth-architect':   Illo000,
+  'visionary-pathfinder': Illo001,
+  'product-purist':      Illo010,
+  'anchored-scaler':     Illo011,
+  'hustler':             Illo100,
+  'solo-visionary':      Illo101,
+  'tinkerer':            Illo110,
+  'global-trailblazer':  Illo111,
 };
