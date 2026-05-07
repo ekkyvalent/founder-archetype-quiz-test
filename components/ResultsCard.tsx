@@ -119,10 +119,49 @@ function PeerBadge({ name, company, delay }: { name: string; company: string; de
   );
 }
 
+const REPORT_DOWNLOAD_URL = process.env.NEXT_PUBLIC_REPORT_URL ?? '#';
+
 // ── Main ResultsCard ──────────────────────────────────────────
 export default function ResultsCard({ archetype, sharerName = '', fromName = '' }: Props) {
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://aspireapp.com/founder-archetype-quiz';
   const [copied, setCopied] = useState(false);
+
+  // Download report email capture
+  const [showEmailForm, setShowEmailForm] = useState(false);
+  const [reportSubmitted, setReportSubmitted] = useState(false);
+  const [reportLoading, setReportLoading] = useState(false);
+  const [reportError, setReportError] = useState('');
+  const [reportEmail, setReportEmail] = useState('');
+  const [reportFirstName, setReportFirstName] = useState('');
+
+  const handleReportSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setReportError('');
+
+    if (!reportEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(reportEmail)) {
+      setReportError('Enter a valid email address.');
+      return;
+    }
+
+    setReportLoading(true);
+    try {
+      await fetch('/api/submit-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: reportEmail,
+          firstName: reportFirstName || '',
+          archetype: archetype.slug,
+          source: 'founder-quiz-report',
+        }),
+      });
+      setReportSubmitted(true);
+    } catch {
+      setReportError('Something went wrong. Please try again.');
+    } finally {
+      setReportLoading(false);
+    }
+  };
 
   // Share URL — includes ?from=name so visitors see personalised banner
   const shareUrl = sharerName
@@ -141,14 +180,27 @@ export default function ResultsCard({ archetype, sharerName = '', fromName = '' 
     ? `I just found out I'm ${archetype.name}.\n\n${archetype.tagline}\n\nFind out your founder type → ${shareUrl}\n\n#FounderArchetype`
     : `Just took the Aspire Founder Archetype Quiz — I'm ${archetype.name}.\n\n${archetype.tagline}\n\nFind out your founder type → ${shareUrl}\n\n#FounderArchetype`;
 
-  const handleLinkedIn = useCallback(() => {
-    navigator.clipboard.writeText(clipboardCopy).catch(() => {});
+  const handleLinkedIn = useCallback(async () => {
+    // Try modern clipboard API first, fall back to execCommand for older/restricted browsers
+    try {
+      await navigator.clipboard.writeText(clipboardCopy);
+    } catch {
+      // Fallback: temporary textarea + execCommand (works without HTTPS permission)
+      const textarea = document.createElement('textarea');
+      textarea.value = clipboardCopy;
+      textarea.style.cssText = 'position:fixed;top:0;left:0;opacity:0;pointer-events:none';
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      try { document.execCommand('copy'); } finally { document.body.removeChild(textarea); }
+    }
+
     setCopied(true);
     // Delay opening the new tab so the toast is visible before focus switches
     setTimeout(() => {
       window.open(linkedInShareUrl, '_blank', 'noopener,noreferrer');
     }, 1500);
-    setTimeout(() => setCopied(false), 3500);
+    setTimeout(() => setCopied(false), 6000);
   }, [clipboardCopy, linkedInShareUrl]);
 
   const dnaValues = {
@@ -314,6 +366,223 @@ export default function ResultsCard({ archetype, sharerName = '', fromName = '' 
           {/* ── Divider between hero and details ─────────── */}
           <div className="border-t border-white/[0.07] mb-10" />
 
+            {/* ── Social sharing ─────────────────────────── */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.36, duration: 0.4 }}
+              className="flex flex-col items-center gap-4 mb-10"
+            >
+              <div className="flex items-center gap-3 w-full">
+                <div className="flex-1 h-px bg-white/[0.07]" />
+                <p className="text-white/30 text-xs font-body flex-shrink-0">
+                  Share your archetype
+                </p>
+                <div className="flex-1 h-px bg-white/[0.07]" />
+              </div>
+
+              <div className="flex gap-3 flex-wrap">
+                {/* LinkedIn — clipboard + open share dialog */}
+                <button
+                  onClick={handleLinkedIn}
+                  className="
+                    flex items-center gap-2 px-4 py-2.5 rounded-xl
+                    border border-white/10 bg-white/[0.04]
+                    text-white/50 hover:text-white hover:border-mint/30 hover:bg-white/[0.08]
+                    font-body text-sm transition-all duration-200
+                  "
+                >
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  </svg>
+                  Share on LinkedIn
+                </button>
+
+                {/* X/Twitter — pre-filled tweet */}
+                <a
+                  href={twitterUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+                    flex items-center gap-2 px-4 py-2.5 rounded-xl
+                    border border-white/10 bg-white/[0.04]
+                    text-white/50 hover:text-white hover:border-mint/30 hover:bg-white/[0.08]
+                    font-body text-sm transition-all duration-200
+                  "
+                >
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
+                  Share on X
+                </a>
+              </div>
+
+              {/* LinkedIn clipboard toast */}
+              <AnimatePresence>
+                {copied && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -4 }}
+                    transition={{ duration: 0.25 }}
+                    className="flex items-center gap-2 text-xs font-body text-mint/80"
+                  >
+                    <svg className="w-3.5 h-3.5 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Post copy copied — paste it into your LinkedIn post
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Hashtag prompt */}
+              <p className="text-white/25 text-xs font-body text-center">
+                Tag{' '}
+                <span className="text-white/40 font-semibold">#FounderArchetype</span>
+                {' '}and see how your DNA compares with your network
+              </p>
+            </motion.div>
+
+            {/* ── Download Report ───────────────────────── */}
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.42, duration: 0.4 }}
+              className="mb-10 p-5 rounded-2xl border border-white/8 bg-white/[0.03]"
+            >
+              <p className="text-[11px] font-body font-semibold tracking-[0.14em] uppercase text-white/30 mb-2">
+                Free resource
+              </p>
+              <h3 className="font-display font-bold text-white text-lg mb-1">
+                Founder Archetype Report 2026
+              </h3>
+              <p className="font-body text-white/50 text-sm leading-relaxed mb-4">
+                The full breakdown of all 8 archetypes, decision frameworks, and what the world's best founders have in common — in one downloadable PDF.
+              </p>
+
+              {/* Default CTA button */}
+              {!showEmailForm && !reportSubmitted && (
+                <button
+                  onClick={() => setShowEmailForm(true)}
+                  className="
+                    w-full bg-mint text-near-black font-display font-bold
+                    py-3.5 px-6 rounded-xl text-sm
+                    hover:opacity-90 transition-opacity duration-200
+                    flex items-center justify-center gap-2
+                  "
+                >
+                  Download the report
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                </button>
+              )}
+
+              {/* Email form */}
+              {showEmailForm && !reportSubmitted && (
+                <motion.form
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                  onSubmit={handleReportSubmit}
+                  className="flex flex-col gap-3"
+                >
+                  <input
+                    type="text"
+                    placeholder="First name (optional)"
+                    value={reportFirstName}
+                    onChange={(e) => setReportFirstName(e.target.value)}
+                    disabled={reportLoading}
+                    className="
+                      w-full px-4 py-3.5 rounded-xl border border-white/10
+                      bg-white/[0.04] text-white placeholder-white/25
+                      font-body text-[15px]
+                      focus:outline-none focus:border-mint/60 focus:bg-white/[0.07]
+                      transition-all duration-200 disabled:opacity-50
+                    "
+                  />
+                  <input
+                    type="email"
+                    placeholder="Work email *"
+                    value={reportEmail}
+                    onChange={(e) => setReportEmail(e.target.value)}
+                    disabled={reportLoading}
+                    required
+                    className="
+                      w-full px-4 py-3.5 rounded-xl border border-white/10
+                      bg-white/[0.04] text-white placeholder-white/25
+                      font-body text-[15px]
+                      focus:outline-none focus:border-mint/60 focus:bg-white/[0.07]
+                      transition-all duration-200 disabled:opacity-50
+                    "
+                  />
+                  {reportError && (
+                    <motion.p
+                      initial={{ opacity: 0, y: -4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="text-red-400 text-sm font-body"
+                    >
+                      {reportError}
+                    </motion.p>
+                  )}
+                  <button
+                    type="submit"
+                    disabled={reportLoading}
+                    className="
+                      w-full bg-mint text-near-black font-display font-bold
+                      py-4 px-6 rounded-xl text-sm
+                      hover:opacity-90 transition-all duration-200
+                      disabled:opacity-50 disabled:cursor-not-allowed
+                    "
+                  >
+                    {reportLoading ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                        </svg>
+                        Sending...
+                      </span>
+                    ) : (
+                      'Send me the report →'
+                    )}
+                  </button>
+                  <p className="text-white/25 text-xs font-body text-center">
+                    No spam. Unsubscribe any time.
+                  </p>
+                </motion.form>
+              )}
+
+              {/* Success state */}
+              {reportSubmitted && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex flex-col items-center gap-3 py-2"
+                >
+                  <div className="w-10 h-10 rounded-full bg-mint/15 border border-mint/30 flex items-center justify-center">
+                    <svg className="w-5 h-5 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <p className="font-body text-white/70 text-sm text-center">
+                    Report is on its way to your inbox.
+                  </p>
+                  {REPORT_DOWNLOAD_URL !== '#' && (
+                    <a
+                      href={REPORT_DOWNLOAD_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-mint text-sm font-body font-semibold hover:opacity-80 transition-opacity"
+                    >
+                      Or download it directly →
+                    </a>
+                  )}
+                </motion.div>
+              )}
+            </motion.div>
+
             {/* ── DNA Breakdown ─────────────────────────── */}
             <div className="mb-10">
               <motion.p
@@ -410,83 +679,6 @@ export default function ResultsCard({ archetype, sharerName = '', fromName = '' 
             >
               {archetype.ctaLabel} →
             </motion.a>
-
-            {/* ── Social sharing ─────────────────────────── */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.78, duration: 0.4 }}
-              className="flex flex-col items-center gap-4"
-            >
-              <div className="flex items-center gap-3 w-full">
-                <div className="flex-1 h-px bg-white/[0.07]" />
-                <p className="text-white/30 text-xs font-body flex-shrink-0">
-                  Share your archetype
-                </p>
-                <div className="flex-1 h-px bg-white/[0.07]" />
-              </div>
-
-              <div className="flex gap-3 flex-wrap">
-                {/* LinkedIn — clipboard + open share dialog */}
-                <button
-                  onClick={handleLinkedIn}
-                  className="
-                    flex items-center gap-2 px-4 py-2.5 rounded-xl
-                    border border-white/10 bg-white/[0.04]
-                    text-white/50 hover:text-white hover:border-mint/30 hover:bg-white/[0.08]
-                    font-body text-sm transition-all duration-200
-                  "
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                  </svg>
-                  Share on LinkedIn
-                </button>
-
-                {/* X/Twitter — pre-filled tweet */}
-                <a
-                  href={twitterUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="
-                    flex items-center gap-2 px-4 py-2.5 rounded-xl
-                    border border-white/10 bg-white/[0.04]
-                    text-white/50 hover:text-white hover:border-mint/30 hover:bg-white/[0.08]
-                    font-body text-sm transition-all duration-200
-                  "
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                  </svg>
-                  Share on X
-                </a>
-              </div>
-
-              {/* LinkedIn clipboard toast */}
-              <AnimatePresence>
-                {copied && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -4 }}
-                    transition={{ duration: 0.25 }}
-                    className="flex items-center gap-2 text-xs font-body text-mint/80"
-                  >
-                    <svg className="w-3.5 h-3.5 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                    </svg>
-                    Post copy copied — paste it into your LinkedIn post
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              {/* Hashtag prompt */}
-              <p className="text-white/25 text-xs font-body text-center">
-                Tag{' '}
-                <span className="text-white/40 font-semibold">#FounderArchetype</span>
-                {' '}and see how your DNA compares with your network
-              </p>
-            </motion.div>
 
             {/* Retake */}
             <div className="text-center mt-8">

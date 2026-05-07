@@ -6,13 +6,12 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import ProgressBar from './ProgressBar';
 import QuestionCard from './QuestionCard';
-import EmailGate from './EmailGate';
 import RevealCard from './RevealCard';
 import { questions } from '@/lib/quiz-data';
-import { calculateArchetype, calculateBinaryCode } from '@/lib/scoring';
+import { calculateArchetype } from '@/lib/scoring';
 import { getArchetypeBySlug } from '@/lib/archetypes';
 
-type Step = 'landing' | 'quiz' | 'email' | 'reveal' | 'redirecting';
+type Step = 'landing' | 'quiz' | 'reveal' | 'redirecting';
 
 // ── Landing screen stats ──────────────────────────────────────
 const STATS = [
@@ -44,7 +43,6 @@ export default function QuizShell() {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [direction, setDirection] = useState(1);
   const [archetypeSlug, setArchetypeSlug] = useState<string | null>(null);
-  const [sharerName, setSharerName] = useState<string>('');
 
   const currentQuestion = questions[currentIndex];
   const selectedOption = answers[currentQuestion?.id] ?? null;
@@ -56,7 +54,10 @@ export default function QuizShell() {
     setAnswers(newAnswers);
 
     if (isLastQuestion) {
-      setTimeout(() => setStep('email'), 380);
+      // Calculate archetype immediately and go straight to reveal
+      const slug = calculateArchetype(newAnswers);
+      setArchetypeSlug(slug);
+      setTimeout(() => setStep('reveal'), 380);
     } else {
       setDirection(1);
       setTimeout(() => setCurrentIndex((i) => i + 1), 380);
@@ -69,32 +70,10 @@ export default function QuizShell() {
     setCurrentIndex((i) => i - 1);
   };
 
-  const handleEmailSubmit = async (email: string, firstName?: string) => {
-    const slug = calculateArchetype(answers);
-    setArchetypeSlug(slug);
-    if (firstName?.trim()) setSharerName(firstName.trim());
-
-    // Fire-and-forget to CRM — we never block results on integration success
-    fetch('/api/submit-lead', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email,
-        firstName: firstName ?? '',
-        archetype: slug,
-        source: 'founder-quiz',
-      }),
-    }).catch(() => {}); // Intentionally swallow — user experience > CRM
-
-    // Go to the reveal step instead of navigating directly
-    setStep('reveal');
-  };
-
   const handleRevealComplete = () => {
     if (!archetypeSlug) return;
     setStep('redirecting');
-    const nameParam = sharerName ? `?name=${encodeURIComponent(sharerName)}` : '';
-    router.push(`/results/${archetypeSlug}${nameParam}`);
+    router.push(`/results/${archetypeSlug}`);
   };
 
   return (
@@ -278,19 +257,6 @@ export default function QuizShell() {
                     />
                   </motion.div>
                 </AnimatePresence>
-              </motion.div>
-            )}
-
-            {/* ── EMAIL GATE ─────────────────────────────── */}
-            {step === 'email' && (
-              <motion.div
-                key="email"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <EmailGate onSubmit={handleEmailSubmit} />
               </motion.div>
             )}
 
