@@ -138,8 +138,12 @@ export default function ResultsCard({ archetype, sharerName = '', fromName = '' 
     e.preventDefault();
     setReportError('');
 
+    if (!reportFirstName.trim()) {
+      setReportError('Please enter your first name.');
+      return;
+    }
     if (!reportEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(reportEmail)) {
-      setReportError('Enter a valid email address.');
+      setReportError('Enter a valid work email address.');
       return;
     }
 
@@ -174,8 +178,8 @@ export default function ResultsCard({ archetype, sharerName = '', fromName = '' 
     : `Just took the Aspire Founder Archetype Quiz — I'm ${archetype.name}. ${archetype.tagline} What's yours? #FounderArchetype`;
   const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetCopy)}&url=${encodeURIComponent(shareUrl)}`;
 
-  // LinkedIn clipboard copy — rich multi-line text
-  const linkedInShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
+  // Open LinkedIn feed directly — user pastes the copied text into a new post
+  const linkedInShareUrl = 'https://www.linkedin.com/feed/';
   const clipboardCopy = sharerName
     ? `I just found out I'm ${archetype.name}.\n\n${archetype.tagline}\n\nFind out your founder type → ${shareUrl}\n\n#FounderArchetype`
     : `Just took the Aspire Founder Archetype Quiz — I'm ${archetype.name}.\n\n${archetype.tagline}\n\nFind out your founder type → ${shareUrl}\n\n#FounderArchetype`;
@@ -451,13 +455,13 @@ export default function ResultsCard({ archetype, sharerName = '', fromName = '' 
               className="mb-10 p-5 rounded-2xl border border-white/8 bg-white/[0.03]"
             >
               <p className="text-[11px] font-body font-semibold tracking-[0.14em] uppercase text-white/30 mb-2">
-                Free resource
+                Free report
               </p>
               <h3 className="font-display font-bold text-white text-lg mb-1">
-                Founder Archetype Report 2026
+                Read the full Founder Archetype Report 2026
               </h3>
               <p className="font-body text-white/50 text-sm leading-relaxed mb-4">
-                The full breakdown of all 8 archetypes, decision frameworks, and what the world's best founders have in common — in one downloadable PDF.
+                Go deeper on all 8 archetypes — the decision frameworks, the famous founder profiles, and what separates the builders who last. Enter your details below to get the full report.
               </p>
 
               {/* Default CTA button */}
@@ -489,10 +493,11 @@ export default function ResultsCard({ archetype, sharerName = '', fromName = '' 
                 >
                   <input
                     type="text"
-                    placeholder="First name (optional)"
+                    placeholder="First name *"
                     value={reportFirstName}
                     onChange={(e) => setReportFirstName(e.target.value)}
                     disabled={reportLoading}
+                    required
                     className="
                       w-full px-4 py-3.5 rounded-xl border border-white/10
                       bg-white/[0.04] text-white placeholder-white/25
