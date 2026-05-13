@@ -367,9 +367,6 @@ export default function ResultsCard({ archetype, sharerName = '', fromName = '' 
             </div>
           </div>
 
-          {/* ── Divider between hero and details ─────────── */}
-          <div className="border-t border-white/[0.07] mb-10" />
-
             {/* ── Social sharing ─────────────────────────── */}
             <motion.div
               initial={{ opacity: 0 }}
