@@ -121,6 +121,40 @@ function PeerBadge({ name, company, delay }: { name: string; company: string; de
 
 const REPORT_DOWNLOAD_URL = process.env.NEXT_PUBLIC_REPORT_URL ?? '#';
 
+// ── Product icon map ──────────────────────────────────────────
+const PRODUCT_ICONS: Record<string, React.ReactElement> = {
+  'Aspire Business Account': (
+    <svg className="w-4 h-4 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+    </svg>
+  ),
+  'Aspire Multi-Currency Account': (
+    <svg className="w-4 h-4 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+  ),
+  'Aspire International Transfers': (
+    <svg className="w-4 h-4 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+    </svg>
+  ),
+  'Aspire Corporate Cards': (
+    <svg className="w-4 h-4 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+    </svg>
+  ),
+  'Aspire Expense Management': (
+    <svg className="w-4 h-4 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+    </svg>
+  ),
+  'default': (
+    <svg className="w-4 h-4 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M13 10V3L4 14h7v7l9-11h-7z" />
+    </svg>
+  ),
+};
+
 // ── Main ResultsCard ──────────────────────────────────────────
 export default function ResultsCard({ archetype, sharerName = '', fromName = '' }: Props) {
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://aspireapp.com/founder-archetype-quiz';
@@ -175,14 +209,14 @@ export default function ResultsCard({ archetype, sharerName = '', fromName = '' 
   // X/Twitter — pre-filled tweet from the sharer's POV
   const tweetCopy = sharerName
     ? `I just found out I'm ${archetype.name}. ${archetype.tagline} What's your founder type? #FounderArchetype`
-    : `Just took the Aspire Founder Archetype Quiz — I'm ${archetype.name}. ${archetype.tagline} What's yours? #FounderArchetype`;
+    : `Just took the Aspire Founder Archetypes — I'm ${archetype.name}. ${archetype.tagline} What's yours? #FounderArchetype`;
   const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetCopy)}&url=${encodeURIComponent(shareUrl)}`;
 
   // Open LinkedIn feed directly — user pastes the copied text into a new post
   const linkedInShareUrl = 'https://www.linkedin.com/feed/';
   const clipboardCopy = sharerName
     ? `I just found out I'm ${archetype.name}.\n\n${archetype.tagline}\n\nFind out your founder type → ${shareUrl}\n\n#FounderArchetype`
-    : `Just took the Aspire Founder Archetype Quiz — I'm ${archetype.name}.\n\n${archetype.tagline}\n\nFind out your founder type → ${shareUrl}\n\n#FounderArchetype`;
+    : `Just took the Aspire Founder Archetypes — I'm ${archetype.name}.\n\n${archetype.tagline}\n\nFind out your founder type → ${shareUrl}\n\n#FounderArchetype`;
 
   const handleLinkedIn = useCallback(async () => {
     // Try modern clipboard API first, fall back to execCommand for older/restricted browsers
@@ -455,7 +489,7 @@ export default function ResultsCard({ archetype, sharerName = '', fromName = '' 
                 Free report
               </p>
               <h3 className="font-display font-bold text-white text-lg mb-1">
-                Read the full Founder Archetype Report 2026
+                Read the full Founder Archetypes Report 2026
               </h3>
               <p className="font-body text-white/50 text-sm leading-relaxed mb-4">
                 Go deeper on all 8 archetypes — the decision frameworks, the famous founder profiles, and what separates the builders who last. Enter your details below to get the full report.
@@ -622,42 +656,42 @@ export default function ResultsCard({ archetype, sharerName = '', fromName = '' 
               >
                 {archetype.productReasoning}
               </motion.p>
-              <div className="flex flex-col gap-3">
-                {archetype.products.map((product, i) => (
-                  <motion.a
-                    key={product.name}
-                    href={product.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.62 + i * 0.08, duration: 0.35 }}
-                    className="
-                      group flex items-start gap-4 p-4 rounded-2xl
-                      border border-white/8 bg-white/[0.03]
-                      hover:border-mint/30 hover:bg-white/[0.06]
-                      transition-all duration-200
-                    "
-                  >
-                    <div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-mint mt-2.5" />
-                    <div className="flex-1">
-                      <p className="font-body font-semibold text-white text-sm group-hover:text-mint transition-colors duration-200">
-                        {product.name}
-                      </p>
-                      <p className="font-body text-white/45 text-sm mt-1 leading-relaxed">
-                        {product.description}
-                      </p>
-                    </div>
-                    <svg
-                      className="w-4 h-4 text-white/20 group-hover:text-mint/60 flex-shrink-0 mt-0.5 transition-colors duration-200"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+
+              {/* Icon-based product pills */}
+              <div className="flex flex-wrap gap-3">
+                {archetype.products.map((product, i) => {
+                  const icon = PRODUCT_ICONS[product.name] ?? PRODUCT_ICONS['default'];
+                  return (
+                    <motion.a
+                      key={product.name}
+                      href={product.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.64 + i * 0.07, duration: 0.3 }}
+                      className="
+                        group flex items-center gap-3 px-4 py-3 rounded-2xl
+                        border border-white/8 bg-white/[0.03]
+                        hover:border-mint/30 hover:bg-white/[0.06]
+                        transition-all duration-200
+                      "
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </motion.a>
-                ))}
+                      {/* Icon circle */}
+                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-mint/10 border border-mint/20 flex items-center justify-center group-hover:bg-mint/15 transition-colors duration-200">
+                        {icon}
+                      </div>
+                      {/* Product name */}
+                      <span className="font-body font-semibold text-white/70 text-sm group-hover:text-white transition-colors duration-200 whitespace-nowrap">
+                        {product.name.replace('Aspire ', '')}
+                      </span>
+                      {/* Arrow */}
+                      <svg className="w-3.5 h-3.5 text-white/20 group-hover:text-mint/60 flex-shrink-0 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </motion.a>
+                  );
+                })}
               </div>
             </div>
 

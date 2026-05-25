@@ -31,7 +31,7 @@ export default function QuestionCard({
   const labelFor = (option: typeof optionA, isSelected: boolean) => (
     <p
       className={`
-        font-body text-[15px] leading-relaxed text-center transition-colors duration-200
+        font-body text-[13px] leading-snug text-center transition-colors duration-200
         ${isSelected ? 'text-white font-semibold' : 'text-white/80'}
       `}
     >

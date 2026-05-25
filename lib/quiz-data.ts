@@ -49,12 +49,12 @@ export const questions: Question[] = [
     options: [
       {
         id: 'q1-a',
-        label: 'Ignore the noise and stay the course on your original, long-horizon roadmap.',
+        label: 'Ignore the noise and stay the course on your original, long-horizon roadmap',
         value: 0,
       },
       {
         id: 'q1-b',
-        label: 'Ship an immediate update or counter-feature to reclaim the market narrative.',
+        label: 'Ship an immediate update or counter-feature to reclaim the market narrative',
         value: 1,
       },
     ],
@@ -67,12 +67,12 @@ export const questions: Question[] = [
     options: [
       {
         id: 'q2-a',
-        label: 'Trust your gut and make the final call, even if it\'s unpopular.',
+        label: 'Trust your gut and make the final call, even if it\'s unpopular',
         value: 0,
       },
       {
         id: 'q2-b',
-        label: 'Look for a consensus within the leadership team to ensure alignment with your core company values.',
+        label: 'Look for a consensus within the leadership team to ensure alignment with your core company values',
         value: 1,
       },
     ],
@@ -85,12 +85,12 @@ export const questions: Question[] = [
     options: [
       {
         id: 'q3-a',
-        label: 'Spend sustainably to extend runway and focus on profitability.',
+        label: 'Spend sustainably to extend runway and focus on profitability',
         value: 0,
       },
       {
         id: 'q3-b',
-        label: 'Double down on growth to win the market quickly.',
+        label: 'Double down on growth to win the market quickly',
         value: 1,
       },
     ],
@@ -109,12 +109,12 @@ export const questions: Question[] = [
     options: [
       {
         id: 'q4-a',
-        label: 'Wait for more clarity or reduce risk before committing.',
+        label: 'Wait for more clarity or reduce risk before committing',
         value: 0,
       },
       {
         id: 'q4-b',
-        label: 'Commit early and course-correct if needed.',
+        label: 'Commit early and course-correct if needed',
         value: 1,
       },
     ],
@@ -127,12 +127,12 @@ export const questions: Question[] = [
     options: [
       {
         id: 'q5-a',
-        label: 'Proven operators who can execute immediately and drive results.',
+        label: 'Proven operators who can execute immediately and drive results',
         value: 0,
       },
       {
         id: 'q5-b',
-        label: 'People who believe in the vision and will grow with it.',
+        label: 'People who believe in the vision and will grow with it',
         value: 1,
       },
     ],
@@ -145,12 +145,12 @@ export const questions: Question[] = [
     options: [
       {
         id: 'q6-a',
-        label: 'Rally the team, reset priorities, and push through a focused release.',
+        label: 'Rally the team, reset priorities, and push through a focused release',
         value: 0,
       },
       {
         id: 'q6-b',
-        label: 'Ship lean and iterate as you go.',
+        label: 'Ship lean and iterate as you go',
         value: 1,
       },
     ],
@@ -169,12 +169,12 @@ export const questions: Question[] = [
     options: [
       {
         id: 'q7-a',
-        label: 'We\'ve built a more resilient business with strong foundations for long-term growth.',
+        label: 'We\'ve built a more resilient business with strong foundations for long-term growth',
         value: 0,
       },
       {
         id: 'q7-b',
-        label: 'We\'ve moved faster than competitors and captured meaningful market share.',
+        label: 'We\'ve moved faster than competitors and captured meaningful market share',
         value: 1,
       },
     ],
@@ -187,12 +187,12 @@ export const questions: Question[] = [
     options: [
       {
         id: 'q8-a',
-        label: 'A tool we adopt selectively with clear guidelines for tangible outcomes.',
+        label: 'A tool we adopt selectively with clear guidelines for tangible outcomes',
         value: 0,
       },
       {
         id: 'q8-b',
-        label: 'A strategic lever we push aggressively to move faster and stay ahead.',
+        label: 'A strategic lever we push aggressively to move faster and stay ahead',
         value: 1,
       },
     ],
@@ -205,12 +205,12 @@ export const questions: Question[] = [
     options: [
       {
         id: 'q9-a',
-        label: 'Explore it selectively — test the upside while protecting your long-term direction.',
+        label: 'Explore it selectively — test the upside while protecting your long-term direction',
         value: 0,
       },
       {
         id: 'q9-b',
-        label: 'Hold the line while finding ways to adapt and align it with your long-term goals.',
+        label: 'Hold the line while finding ways to adapt and align it with your long-term goals',
         value: 1,
       },
     ],
@@ -223,12 +223,12 @@ export const questions: Question[] = [
     options: [
       {
         id: 'q10-a',
-        label: 'Structured and intentional — setting clear direction, priorities, and standards for the team.',
+        label: 'Structured and intentional — setting clear direction, priorities, and standards for the team',
         value: 0,
       },
       {
         id: 'q10-b',
-        label: 'Bold and decisive — making calls quickly and rallying the team around them.',
+        label: 'Bold and decisive — making calls quickly and rallying the team around them',
         value: 1,
       },
     ],
