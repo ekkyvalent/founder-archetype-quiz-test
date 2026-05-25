@@ -76,9 +76,9 @@ export default function ResultsPage({ params, searchParams }: Props) {
       <header className="flex items-center justify-between px-6 py-5 border-b border-white/[0.06]">
         <a
           href="/quiz"
-          className="font-display font-bold text-white text-lg tracking-tight hover:opacity-70 transition-opacity duration-200"
+          className="hover:opacity-70 transition-opacity duration-200"
         >
-          aspire<span className="text-mint">.</span>
+          <img src="/aspire-logo.svg" alt="Aspire" className="h-5 w-auto" />
         </a>
         <a
           href="/quiz"

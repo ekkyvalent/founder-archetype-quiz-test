@@ -83,11 +83,10 @@ export default function QuizShell() {
         {/* Aspire wordmark */}
         <motion.button
           onClick={() => step !== 'landing' && setStep('landing')}
-          className="font-display font-bold text-white text-lg tracking-tight"
           whileHover={{ opacity: 0.8 }}
           transition={{ duration: 0.15 }}
         >
-          aspire<span className="text-mint">.</span>
+          <img src="/aspire-logo.svg" alt="Aspire" className="h-5 w-auto" />
         </motion.button>
 
         {/* Right: back button or step counter */}
