@@ -80,7 +80,7 @@ function CardBack() {
               stroke="rgba(0,211,149,0.45)" strokeWidth="1.5" strokeLinecap="round" />
           </svg>
         </div>
-        <p className="font-display text-[10px] tracking-[0.26em] uppercase text-white/18 font-semibold">
+        <p className="font-display text-[10px] tracking-wide text-white/18 font-semibold">
           Your archetype awaits
         </p>
       </div>
@@ -97,8 +97,8 @@ function CardFront({ archetype }: { archetype: Archetype }) {
   return (
     <div
       className="absolute inset-0 rounded-xl overflow-hidden flex flex-col
-        bg-[#0d1f18] border border-mint
-        shadow-[0_0_0_1px_#00D395,0_0_56px_rgba(0,211,149,0.20)]"
+        bg-[#1e281f] border border-mint
+        shadow-[0_0_0_1px_#BEFFCF,0_0_56px_rgba(190,255,207,0.20)]"
       style={{
         backfaceVisibility: 'hidden',
         transform: 'rotateY(180deg)',
@@ -278,7 +278,7 @@ export default function RevealCard({ archetype, onComplete }: Props) {
               animate={{ scale: [1, 1.6, 1], opacity: [1, 0.3, 1] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
             />
-            <span className="font-body text-white/22 text-[11px] tracking-[0.16em] uppercase">
+            <span className="font-body text-white/22 text-[11px] tracking-wide">
               Tap the card
             </span>
             <motion.span

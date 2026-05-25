@@ -71,7 +71,7 @@ function DnaDimensionCard({
       className="p-4 rounded-2xl border border-white/8 bg-white/[0.03]"
     >
       {/* Dimension label */}
-      <p className="text-[10px] font-body font-semibold tracking-[0.14em] uppercase text-white/30 mb-3">
+      <p className="text-[10px] font-body font-semibold tracking-wide text-white/30 mb-3">
         {meta.label}
       </p>
 
@@ -322,7 +322,7 @@ export default function ResultsCard({ archetype, sharerName = '', fromName = '' 
                 initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.05, duration: 0.35 }}
-                className="inline-flex items-center gap-2 bg-mint/10 border border-mint/20 text-mint text-[11px] font-body font-semibold uppercase tracking-[0.12em] px-3 py-1.5 rounded-full mb-4"
+                className="inline-flex items-center gap-2 bg-mint/10 border border-mint/20 text-mint text-[11px] font-body font-semibold tracking-wide px-3 py-1.5 rounded-full mb-4"
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-mint" />
                 Your archetype
@@ -382,7 +382,7 @@ export default function ResultsCard({ archetype, sharerName = '', fromName = '' 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.3, duration: 0.3 }}
-                    className="text-[11px] font-body font-semibold tracking-[0.14em] uppercase text-white/30 mb-3"
+                    className="text-[11px] font-body font-semibold tracking-wide text-white/30 mb-3"
                   >
                     Your famous peers
                   </motion.p>
@@ -485,7 +485,7 @@ export default function ResultsCard({ archetype, sharerName = '', fromName = '' 
               transition={{ delay: 0.42, duration: 0.4 }}
               className="mb-10 p-5 rounded-2xl border border-white/8 bg-white/[0.03]"
             >
-              <p className="text-[11px] font-body font-semibold tracking-[0.14em] uppercase text-white/30 mb-2">
+              <p className="text-[11px] font-body font-semibold tracking-wide text-white/30 mb-2">
                 Free report
               </p>
               <h3 className="font-display font-bold text-white text-lg mb-1">
@@ -625,7 +625,7 @@ export default function ResultsCard({ archetype, sharerName = '', fromName = '' 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.36, duration: 0.3 }}
-                className="text-[11px] font-body font-semibold tracking-[0.14em] uppercase text-white/30 mb-3"
+                className="text-[11px] font-body font-semibold tracking-wide text-white/30 mb-3"
               >
                 Your DNA breakdown
               </motion.p>
@@ -642,7 +642,7 @@ export default function ResultsCard({ archetype, sharerName = '', fromName = '' 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6, duration: 0.3 }}
-                className="text-[11px] font-body font-semibold tracking-[0.14em] uppercase text-white/30 mb-3"
+                className="text-[11px] font-body font-semibold tracking-wide text-white/30 mb-3"
               >
                 Built for founders like you
               </motion.p>

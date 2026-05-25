@@ -9,11 +9,11 @@
 
 @layer base {
   :root {
-    --color-mint: #00D395;
-    --color-near-black: #141414;
+    --color-mint: #BEFFCF;
+    --color-near-black: #181818;
     --color-charcoal: #3C3C3C;
     --color-cloud: #F0F0EB;
-    --color-mint-tint: #C8F5E3;
+    --color-mint-tint: #BEFFCF;
   }
 
   html {
@@ -23,7 +23,7 @@
   }
 
   body {
-    background-color: #141414;
+    background-color: #181818;
     color: #ffffff;
   }
 
@@ -71,7 +71,7 @@
     background: linear-gradient(
       105deg,
       transparent 40%,
-      rgba(0, 211, 149, 0.06) 50%,
+      rgba(190, 255, 207, 0.06) 50%,
       transparent 60%
     );
     background-size: 200% 100%;
@@ -147,9 +147,9 @@
 
 /* ── Option card hover glow ─────────────────────────────────── */
 .option-card-glow:hover {
-  box-shadow: 0 0 0 1px rgba(0, 211, 149, 0.4), 0 0 20px rgba(0, 211, 149, 0.06);
+  box-shadow: 0 0 0 1px rgba(190, 255, 207, 0.4), 0 0 20px rgba(190, 255, 207, 0.06);
 }
 
 .option-card-selected {
-  box-shadow: 0 0 0 1.5px #00D395, 0 0 24px rgba(0, 211, 149, 0.12);
+  box-shadow: 0 0 0 1.5px #BEFFCF, 0 0 24px rgba(190, 255, 207, 0.12);
 }

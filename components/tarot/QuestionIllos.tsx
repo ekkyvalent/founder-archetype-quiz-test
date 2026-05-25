@@ -7,7 +7,7 @@
 // ─────────────────────────────────────────────────────────────
 
 const W = 'rgba(255,255,255,'; // white helper
-const M = '#00D395';           // mint
+const M = '#BEFFCF';           // mint
 
 // ── Shared wrapper ────────────────────────────────────────────
 function Illo({ children }: { children: React.ReactNode }) {

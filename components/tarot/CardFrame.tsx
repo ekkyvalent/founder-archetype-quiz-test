@@ -82,8 +82,8 @@ export default function CardFrame({
         ${sizeClass}
         ${isClickable ? 'cursor-pointer select-none' : ''}
         ${isSelected
-          ? 'border-mint bg-[#0d1f18] shadow-[0_0_0_1px_#00D395,0_0_32px_rgba(0,211,149,0.15)]'
-          : 'border-white/12 bg-[#1a1a1a] hover:border-white/25'
+          ? 'border-mint bg-[#1e281f] shadow-[0_0_0_1px_#BEFFCF,0_0_32px_rgba(190,255,207,0.15)]'
+          : 'border-white/12 bg-[#1e1e1e] hover:border-white/25'
         }
       `}
     >

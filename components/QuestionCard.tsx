@@ -43,7 +43,7 @@ export default function QuestionCard({
     <div className="w-full">
       {/* Scenario label */}
       <div className="mb-4">
-        <span className="inline-block text-[11px] font-body font-semibold tracking-[0.15em] uppercase text-mint/70">
+        <span className="inline-block text-[11px] font-body font-semibold tracking-wide text-mint/70">
           Scenario {questionNumber}
         </span>
       </div>
@@ -83,7 +83,7 @@ export default function QuestionCard({
           transition={{ delay: 0.15, duration: 0.3 }}
         >
           <div className="w-px h-10 bg-white/10" />
-          <span className="font-display text-[10px] font-bold tracking-[0.22em] uppercase text-white/22">
+          <span className="font-display text-[10px] font-bold text-white/22">
             or
           </span>
           <div className="w-px h-10 bg-white/10" />
@@ -112,7 +112,7 @@ export default function QuestionCard({
       {/* OR divider — mobile (between stacked cards it's rendered via margin) */}
       <div className="flex sm:hidden items-center gap-3 my-3">
         <div className="flex-1 h-px bg-white/10" />
-        <span className="font-display text-[10px] font-bold tracking-[0.22em] uppercase text-white/22">
+        <span className="font-display text-[10px] font-bold text-white/22">
           or
         </span>
         <div className="flex-1 h-px bg-white/10" />

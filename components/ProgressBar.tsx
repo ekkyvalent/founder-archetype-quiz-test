@@ -14,7 +14,7 @@ export default function ProgressBar({ current, total }: Props) {
     <div className="w-full">
       {/* Step counter + percentage */}
       <div className="flex items-center justify-between mb-3">
-        <span className="text-xs font-body text-white/40 tracking-widest uppercase">
+        <span className="text-xs font-body text-white/40 tracking-wide">
           Question {current} of {total}
         </span>
         <span className="text-xs font-body font-semibold text-mint tabular-nums">
@@ -35,7 +35,7 @@ export default function ProgressBar({ current, total }: Props) {
               initial={false}
               animate={{
                 backgroundColor: isDone
-                  ? '#00D395'
+                  ? '#BEFFCF'
                   : isCurrent
                   ? '#ffffff'
                   : 'rgba(255,255,255,0.12)',
@@ -55,7 +55,7 @@ export default function ProgressBar({ current, total }: Props) {
       <div className="w-full h-px bg-white/8 rounded-full overflow-hidden">
         <motion.div
           className="h-full rounded-full"
-          style={{ background: 'linear-gradient(90deg, #00D395, #00F5AF)' }}
+          style={{ background: 'linear-gradient(90deg, #BEFFCF, #d4ffe0)' }}
           initial={{ width: 0 }}
           animate={{ width: `${percent}%` }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}

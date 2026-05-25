@@ -132,7 +132,7 @@ export default function QuizShell() {
                   transition={{ delay: 0.1, duration: 0.4 }}
                   className="flex items-center gap-2 mb-6"
                 >
-                  <span className="text-[11px] font-body font-semibold tracking-[0.14em] uppercase text-white/40">
+                  <span className="text-[11px] font-body font-semibold tracking-wide text-white/40">
                     Founder Archetypes 2026
                   </span>
                 </motion.div>
@@ -183,7 +183,7 @@ export default function QuizShell() {
                   transition={{ delay: 0.4, duration: 0.4 }}
                   className="mb-9"
                 >
-                  <p className="text-[11px] font-body font-semibold tracking-[0.14em] uppercase text-white/35 mb-3">
+                  <p className="text-[11px] font-body font-semibold tracking-wide text-white/35 mb-3">
                     Why take this quiz?
                   </p>
                   <p className="font-body text-white/50 text-[14px] leading-relaxed">

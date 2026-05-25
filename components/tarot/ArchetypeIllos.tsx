@@ -2,7 +2,7 @@
 
 // Colour shorthands
 const W = 'rgba(255,255,255,';
-const M = '#00D395';
+const M = '#BEFFCF';
 
 // ── Illo wrapper ─────────────────────────────────────────────────
 function Illo({ children }: { children: React.ReactNode }) {

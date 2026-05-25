@@ -59,7 +59,7 @@ export default function EmailGate({ onSubmit }: Props) {
 
       {/* Heading */}
       <div className="text-center mb-8">
-        <p className="text-mint font-body text-[11px] font-semibold uppercase tracking-[0.15em] mb-3">
+        <p className="text-mint font-body text-[11px] font-semibold tracking-wide mb-3">
           Your DNA is ready
         </p>
         <h2 className="font-display text-2xl md:text-3xl font-bold text-white leading-tight mb-4">

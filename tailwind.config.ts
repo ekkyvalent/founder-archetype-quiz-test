@@ -10,9 +10,9 @@ const config: Config = {
     extend: {
       colors: {
         // Aspire brand palette
-        mint: '#00D395',
-        'mint-tint': '#C8F5E3',
-        'near-black': '#141414',
+        mint: '#BEFFCF',
+        'mint-tint': '#BEFFCF',
+        'near-black': '#181818',
         charcoal: '#3C3C3C',
         cloud: '#F0F0EB',
       },
