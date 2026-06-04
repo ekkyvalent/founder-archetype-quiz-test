@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
-  const { email, archetype, source } = await req.json();
+  const { email, firstName, archetype, source } = await req.json();
 
   if (!email || !archetype) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -23,8 +23,9 @@ export async function POST(req: NextRequest) {
           body: JSON.stringify({
             fields: [
               { name: 'email', value: email },
-              { name: 'quiz_archetype', value: archetype },
-              { name: 'lead_source', value: source ?? 'founder-quiz' },
+              ...(firstName ? [{ name: 'firstname', value: firstName }] : []),
+              // Archetype stored in standard message field — no custom properties needed
+              { name: 'message', value: `archetype: ${archetype} | source: ${source ?? 'founder-quiz'}` },
             ],
             context: {
               pageUri: 'https://aspireapp.com/founder-archetype-quiz/quiz',
