@@ -179,9 +179,9 @@ export const archetypes: Record<BinaryCode, Archetype> = {
         url: `https://aspireapp.com/multi-currency?${BASE_UTM}&utm_content=anchored-scaler`,
       },
       {
-        name: 'Aspire Corporate Cards',
-        description: 'Give global teams controlled spend access with real-time visibility across every market and entity.',
-        url: `https://aspireapp.com/corporate-cards?${BASE_UTM}&utm_content=anchored-scaler`,
+        name: 'Aspire OS',
+        description: 'Automate business expense management across every global entity without losing control.',
+        url: `https://aspireapp.com/expense-management?${BASE_UTM}&utm_content=anchored-scaler`,
       },
     ],
     ctaLabel: 'Build your global financial stack',
@@ -279,9 +279,9 @@ export const archetypes: Record<BinaryCode, Archetype> = {
       'Every sprint counts, and admin between sprints is a tax on your output. Corporate cards with per-person limits keep the lean team moving without you approving every purchase, while automated expense management means receipts and reconciliation happen in the background — not on your desk.',
     products: [
       {
-        name: 'Aspire Corporate Cards',
-        description: 'Issue cards for your lean team with spend limits per person, per project. Ship fast without losing control of where the money goes.',
-        url: `https://aspireapp.com/corporate-cards?${BASE_UTM}&utm_content=tinkerer`,
+        name: 'Aspire OS',
+        description: 'Automate business expense management between every sprint without losing control of where the money goes.',
+        url: `https://aspireapp.com/expense-management?${BASE_UTM}&utm_content=tinkerer`,
       },
       {
         name: 'Aspire Expense Management',
@@ -319,9 +319,9 @@ export const archetypes: Record<BinaryCode, Archetype> = {
         url: `https://aspireapp.com/multi-currency?${BASE_UTM}&utm_content=global-trailblazer`,
       },
       {
-        name: 'Aspire Corporate Cards',
-        description: 'Spend control that scales with your headcount. Give every global team access with per-card limits and real-time visibility.',
-        url: `https://aspireapp.com/corporate-cards?${BASE_UTM}&utm_content=global-trailblazer`,
+        name: 'Aspire OS',
+        description: 'Automate business expense management across markets without losing control as your headcount scales.',
+        url: `https://aspireapp.com/expense-management?${BASE_UTM}&utm_content=global-trailblazer`,
       },
     ],
     ctaLabel: 'Build your global financial stack',
