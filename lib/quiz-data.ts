@@ -205,7 +205,7 @@ export const questions: Question[] = [
     options: [
       {
         id: 'q9-a',
-        label: 'Explore it selectively — test the upside while protecting your long-term direction',
+        label: 'Explore it selectively. Test the upside while protecting your long-term direction',
         value: 0,
       },
       {
@@ -223,12 +223,12 @@ export const questions: Question[] = [
     options: [
       {
         id: 'q10-a',
-        label: 'Structured and intentional — setting clear direction, priorities, and standards for the team',
+        label: 'Structured and intentional, setting clear direction, priorities, and standards for the team',
         value: 0,
       },
       {
         id: 'q10-b',
-        label: 'Bold and decisive — making calls quickly and rallying the team around them',
+        label: 'Bold and decisive, making calls quickly and rallying the team around them',
         value: 1,
       },
     ],

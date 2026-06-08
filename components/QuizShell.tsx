@@ -187,7 +187,7 @@ export default function QuizShell() {
                     Why take this quiz?
                   </p>
                   <p className="font-body text-white/50 text-[14px] leading-relaxed">
-                    We have identified 10 real-world inflection points where a founder's intuition takes over. By navigating these scenarios, you will see the specific execution logic that drives your decisions — whether you are scaling with surgical precision or betting on a future no one else sees yet.
+                    We have identified 10 real-world inflection points where a founder's intuition takes over. By navigating these scenarios, you will see the specific execution logic that drives your decisions: whether you are scaling with surgical precision or betting on a future no one else sees yet.
                   </p>
                 </motion.div>
 

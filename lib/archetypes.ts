@@ -61,17 +61,17 @@ export const archetypes: Record<BinaryCode, Archetype> = {
     secondaryArchetypes: ['Steward of the future', 'Principle-led builder'],
     dna: { growth: 'deliberate', decisions: 'conviction', scale: 'lean' },
     description:
-      'You build in silence and optimize for durability. You aren\'t interested in the hype cycle — you\'re interested in building a foundation that is statistically impossible to break.',
+      'You build in silence and optimize for durability. You aren\'t interested in the hype cycle. You\'re interested in building a foundation that is statistically impossible to break.',
     peers: [
       { name: 'Melanie Perkins', company: 'Canva' },
       { name: 'Anthony Tan', company: 'Early stage - Grab' },
     ],
     productReasoning:
-      'You build lean and deliberate — unnecessary overhead is a liability, not a feature. A clean business account with full visibility keeps your foundation airtight, while automated expense management ensures your lean operations never spring a leak.',
+      'You build lean and deliberate. Unnecessary overhead is a liability, not a feature. A clean business account with full visibility keeps your foundation airtight, while automated expense management ensures your lean operations never spring a leak.',
     products: [
       {
         name: 'Aspire Business Account',
-        description: 'No minimum balance, no hidden fees. Full real-time visibility on every transaction — built for founders who demand total control.',
+        description: 'No minimum balance, no hidden fees. Full real-time visibility on every transaction, built for founders who demand total control.',
         url: `https://aspireapp.com/business-account?${BASE_UTM}&utm_content=stealth-architect`,
       },
       {
@@ -102,7 +102,7 @@ export const archetypes: Record<BinaryCode, Archetype> = {
       { name: 'Anthony Tan', company: 'Grab' },
     ],
     productReasoning:
-      'Your growth is deliberate, but your map is unambiguously global. As each new market opens, the ability to hold and move money across borders cleanly — without surprise FX fees or payment delays — is what makes surgical expansion actually surgical.',
+      'Your growth is deliberate, but your map is unambiguously global. As each new market opens, the ability to hold and move money across borders cleanly, without surprise FX fees or payment delays, which is what makes surgical expansion actually surgical.',
     products: [
       {
         name: 'Aspire Multi-Currency Account',
@@ -136,7 +136,7 @@ export const archetypes: Record<BinaryCode, Archetype> = {
       { name: 'Dylan Field', company: 'Figma' },
     ],
     productReasoning:
-      'You run a tight, principled ship where every decision — including financial ones — has to meet a high bar. A business account with zero noise and corporate cards with per-person limits mean your elite team can spend without asking permission every time, while you maintain full oversight.',
+      'You run a tight, principled ship where every decision, including financial ones, has to meet a high bar. A business account with zero noise and corporate cards with per-person limits mean your elite team can spend without asking permission every time, while you maintain full oversight.',
     products: [
       {
         name: 'Aspire Business Account',
@@ -171,7 +171,7 @@ export const archetypes: Record<BinaryCode, Archetype> = {
       { name: 'Melanie Perkins', company: 'Canva' },
     ],
     productReasoning:
-      'You are building global systems that need to hold under scrutiny. Multi-currency accounts give you the financial visibility to operate across markets with confidence, while corporate cards enforce spend discipline across every entity — so your principles scale as fast as your headcount does.',
+      'You are building global systems that need to hold under scrutiny. Multi-currency accounts give you the financial visibility to operate across markets with confidence, while corporate cards enforce spend discipline across every entity, so your principles scale as fast as your headcount does.',
     products: [
       {
         name: 'Aspire Multi-Currency Account',
@@ -206,11 +206,11 @@ export const archetypes: Record<BinaryCode, Archetype> = {
       { name: 'Markus Villig', company: 'Early stage - Bolt' },
     ],
     productReasoning:
-      'You move at a pace where reimbursement cycles and approval bottlenecks are a real drag on momentum. A business account that is operational from day one and corporate cards for the team mean your people can spend when they need to — without waiting for a finance process to catch up with your speed.',
+      'You move at a pace where reimbursement cycles and approval bottlenecks are a real drag on momentum. A business account that is operational from day one and corporate cards for the team mean your people can spend when they need to, without waiting for a finance process to catch up with your speed.',
     products: [
       {
         name: 'Aspire Business Account',
-        description: 'Open in minutes, operational from day one. No waiting, no paperwork purgatory — a business account that moves as fast as you do.',
+        description: 'Open in minutes, operational from day one. No waiting, no paperwork purgatory. A business account that moves as fast as you do.',
         url: `https://aspireapp.com/business-account?${BASE_UTM}&utm_content=hustler`,
       },
       {
@@ -229,7 +229,7 @@ export const archetypes: Record<BinaryCode, Archetype> = {
     code: '101',
     slug: 'solo-visionary',
     name: 'The solo visionary',
-    tagline: 'Building a future that doesn\'t exist yet — and getting there first.',
+    tagline: 'Building a future that doesn\'t exist yet. Getting there first.',
     badge: 'The solo visionary',
     dominantArchetype: 'Steward of the future',
     secondaryArchetypes: ['Speed-first operator', 'Global-first'],
@@ -241,11 +241,11 @@ export const archetypes: Record<BinaryCode, Archetype> = {
       { name: 'Vlad Tenev', company: 'Robinhood' },
     ],
     productReasoning:
-      'You are global from day one and moving faster than any traditional financial setup can handle. Multi-currency accounts remove the FX friction as you push into new markets, and corporate cards give your fast-growing team the spend access they need to keep pace — without the admin that kills momentum.',
+      'You are global from day one and moving faster than any traditional financial setup can handle. Multi-currency accounts remove the FX friction as you push into new markets, and corporate cards give your fast-growing team the spend access they need to keep pace, without the admin that kills momentum.',
     products: [
       {
         name: 'Aspire Multi-Currency Account',
-        description: 'Hold and move money in 30+ currencies from day one. Your company was always global — your banking should be too.',
+        description: 'Hold and move money in 30+ currencies from day one. Your company was always global. Your banking should be too.',
         url: `https://aspireapp.com/multi-currency?${BASE_UTM}&utm_content=solo-visionary`,
       },
       {
@@ -276,7 +276,7 @@ export const archetypes: Record<BinaryCode, Archetype> = {
       { name: 'Dylan Field', company: 'Expansion stage - Figma' },
     ],
     productReasoning:
-      'Every sprint counts, and admin between sprints is a tax on your output. Corporate cards with per-person limits keep the lean team moving without you approving every purchase, while automated expense management means receipts and reconciliation happen in the background — not on your desk.',
+      'Every sprint counts, and admin between sprints is a tax on your output. Corporate cards with per-person limits keep the lean team moving without you approving every purchase, while automated expense management means receipts and reconciliation happen in the background, not on your desk.',
     products: [
       {
         name: 'Aspire OS',
@@ -311,7 +311,7 @@ export const archetypes: Record<BinaryCode, Archetype> = {
       { name: 'Markus Villig', company: 'Bolt' },
     ],
     productReasoning:
-      'Blitzscaling across markets with a distributed team demands financial infrastructure that scales as fast as your ambition. Multi-currency accounts remove the friction of operating in multiple currencies simultaneously, while corporate cards give every global team member controlled spend access from day one — with the real-time visibility your principles require.',
+      'Blitzscaling across markets with a distributed team demands financial infrastructure that scales as fast as your ambition. Multi-currency accounts remove the friction of operating in multiple currencies simultaneously, while corporate cards give every global team member controlled spend access from day one, with the real-time visibility your principles require.',
     products: [
       {
         name: 'Aspire Multi-Currency Account',

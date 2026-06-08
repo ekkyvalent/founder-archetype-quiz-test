@@ -206,7 +206,7 @@ export default function RevealCard({ archetype, onComplete }: Props) {
               transition={{ duration: 0.3 }}
               className="font-body text-white/35 text-sm tracking-wide"
             >
-              Your archetype is ready — tap to reveal
+              Your archetype is ready. Tap to reveal
             </motion.p>
           )}
           {stage === 'flipping' && (

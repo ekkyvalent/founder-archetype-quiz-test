@@ -214,14 +214,14 @@ export default function ResultsCard({ archetype, sharerName = '', fromName = '' 
   // X/Twitter — pre-filled tweet from the sharer's POV
   const tweetCopy = sharerName
     ? `I just found out I'm ${archetype.name}. ${archetype.tagline} What's your founder type? #FounderArchetype`
-    : `Just took the Aspire Founder Archetypes — I'm ${archetype.name}. ${archetype.tagline} What's yours? #FounderArchetype`;
+    : `Just took the Aspire Founder Archetypes. I'm ${archetype.name}. ${archetype.tagline} What's yours? #FounderArchetype`;
   const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetCopy)}&url=${encodeURIComponent(shareUrl)}`;
 
   // Open LinkedIn feed directly — user pastes the copied text into a new post
   const linkedInShareUrl = 'https://www.linkedin.com/feed/';
   const clipboardCopy = sharerName
     ? `I just found out I'm ${archetype.name}.\n\n${archetype.tagline}\n\nFind out your founder type → ${shareUrl}\n\n#FounderArchetype`
-    : `Just took the Aspire Founder Archetypes — I'm ${archetype.name}.\n\n${archetype.tagline}\n\nFind out your founder type → ${shareUrl}\n\n#FounderArchetype`;
+    : `Just took the Aspire Founder Archetypes. I'm ${archetype.name}.\n\n${archetype.tagline}\n\nFind out your founder type → ${shareUrl}\n\n#FounderArchetype`;
 
   const handleLinkedIn = useCallback(async () => {
     // Try modern clipboard API first, fall back to execCommand for older/restricted browsers
@@ -470,7 +470,7 @@ export default function ResultsCard({ archetype, sharerName = '', fromName = '' 
                     <svg className="w-3.5 h-3.5 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                     </svg>
-                    Post copy copied — paste it into your LinkedIn post
+                    Post copy copied. Paste it into your LinkedIn post
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -497,7 +497,7 @@ export default function ResultsCard({ archetype, sharerName = '', fromName = '' 
                 Read the full Founder Archetypes Report 2026
               </h3>
               <p className="font-body text-white/50 text-sm leading-relaxed mb-4">
-                Go deeper on all 8 archetypes — the decision frameworks, the famous founder profiles, and what separates the builders who last. Enter your details below to get the full report.
+                Go deeper on all 8 archetypes: the decision frameworks, the famous founder profiles, and what separates the builders who last. Enter your details below to get the full report.
               </p>
 
               {/* Default CTA button */}
@@ -688,7 +688,7 @@ export default function ResultsCard({ archetype, sharerName = '', fromName = '' 
                       </div>
                       {/* Product name */}
                       <span className="font-body font-semibold text-white/70 text-sm group-hover:text-white transition-colors duration-200 whitespace-nowrap">
-                        {product.name.replace('Aspire ', '')}
+                        {product.name === 'Aspire OS' ? 'Aspire OS' : product.name.replace('Aspire ', '')}
                       </span>
                       {/* Arrow */}
                       <svg className="w-3.5 h-3.5 text-white/20 group-hover:text-mint/60 flex-shrink-0 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -66,7 +66,7 @@ export default function EmailGate({ onSubmit }: Props) {
           Unlock your full founder profile
         </h2>
         <p className="font-body text-white/50 text-[15px] leading-relaxed">
-          Your archetype, your famous founder peers, and the Aspire products built for your exact execution style — one email away.
+          Your archetype, your famous founder peers, and the Aspire products built for your exact execution style. One email away.
         </p>
       </div>
 
