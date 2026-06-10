@@ -216,11 +216,28 @@ export default function ResultsCard({ archetype }: Props) {
   const clipboardCopy = `Just took the Aspire Founder Archetypes. I'm ${archetypeName}.\n\n${archetype.tagline}\n\nFind out your founder type → ${shareUrl}\n\n#FounderArchetype`;
 
   const handleLinkedIn = useCallback(async () => {
-    // Try modern clipboard API first, fall back to execCommand for older/restricted browsers
+    const shareCardUrl = `/share/${archetype.slug}.png`;
+
+    // On mobile: Web Share API opens the native share sheet with image + caption in one tap
+    if (typeof navigator.share === 'function') {
+      try {
+        const imgRes = await fetch(shareCardUrl);
+        const blob = await imgRes.blob();
+        const file = new File([blob], `${archetype.slug}-founder-archetype.png`, { type: 'image/png' });
+
+        if (navigator.canShare?.({ files: [file] })) {
+          await navigator.share({ files: [file], text: clipboardCopy });
+          return;
+        }
+      } catch {
+        // Fall through to desktop flow if Web Share fails
+      }
+    }
+
+    // Desktop fallback: copy caption to clipboard + open LinkedIn feed
     try {
       await navigator.clipboard.writeText(clipboardCopy);
     } catch {
-      // Fallback: temporary textarea + execCommand (works without HTTPS permission)
       const textarea = document.createElement('textarea');
       textarea.value = clipboardCopy;
       textarea.style.cssText = 'position:fixed;top:0;left:0;opacity:0;pointer-events:none';
@@ -230,13 +247,18 @@ export default function ResultsCard({ archetype }: Props) {
       try { document.execCommand('copy'); } finally { document.body.removeChild(textarea); }
     }
 
+    // Also trigger image download so it's ready to attach
+    const a = document.createElement('a');
+    a.href = shareCardUrl;
+    a.download = `${archetype.slug}-founder-archetype.png`;
+    a.click();
+
     setCopied(true);
-    // Delay opening the new tab so the toast is visible before focus switches
     setTimeout(() => {
       window.open(linkedInShareUrl, '_blank', 'noopener,noreferrer');
     }, 1500);
     setTimeout(() => setCopied(false), 6000);
-  }, [clipboardCopy, linkedInShareUrl]);
+  }, [archetype.slug, clipboardCopy, linkedInShareUrl]);
 
   const dnaValues = {
     growth: archetype.dna.growth === 'speed' ? 1 : 0,
@@ -419,7 +441,7 @@ export default function ResultsCard({ archetype }: Props) {
 
                 {/* Download social card */}
                 <a
-                  href={`/og/${archetype.slug}.png`}
+                  href={`/share/${archetype.slug}.png`}
                   download={`${archetype.slug}-founder-archetype.png`}
                   className="
                     flex items-center gap-2 px-4 py-2.5 rounded-xl
@@ -448,7 +470,7 @@ export default function ResultsCard({ archetype }: Props) {
                     <svg className="w-3.5 h-3.5 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                     </svg>
-                    Post copy copied. Paste it into your LinkedIn post
+                    Caption copied + image downloading — paste and attach in your LinkedIn post
                   </motion.div>
                 )}
               </AnimatePresence>
