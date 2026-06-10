@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           alt: `${archetype.name} — Aspire Founder Archetype`,
         },
       ],
-      type: 'website',
+      type: 'article',
     },
     twitter: {
       card: 'summary_large_image',

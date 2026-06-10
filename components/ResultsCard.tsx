@@ -207,12 +207,13 @@ export default function ResultsCard({ archetype }: Props) {
   const shareUrl = `${BASE_URL}/results/${archetype.slug}`;
 
   // X/Twitter — pre-filled tweet
-  const tweetCopy = `Just took the Aspire Founder Archetypes. I'm ${archetype.name}. ${archetype.tagline} What's yours? #FounderArchetype`;
+  const archetypeName = archetype.name.charAt(0).toLowerCase() + archetype.name.slice(1);
+  const tweetCopy = `Just took the Aspire Founder Archetypes. I'm ${archetypeName}. ${archetype.tagline} What's yours? #FounderArchetype`;
   const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetCopy)}&url=${encodeURIComponent(shareUrl)}`;
 
   // LinkedIn — copy to clipboard, open feed
   const linkedInShareUrl = 'https://www.linkedin.com/feed/';
-  const clipboardCopy = `Just took the Aspire Founder Archetypes. I'm ${archetype.name}.\n\n${archetype.tagline}\n\nFind out your founder type → ${shareUrl}\n\n#FounderArchetype`;
+  const clipboardCopy = `Just took the Aspire Founder Archetypes. I'm ${archetypeName}.\n\n${archetype.tagline}\n\nFind out your founder type → ${shareUrl}\n\n#FounderArchetype`;
 
   const handleLinkedIn = useCallback(async () => {
     // Try modern clipboard API first, fall back to execCommand for older/restricted browsers
@@ -371,28 +372,28 @@ export default function ResultsCard({ archetype }: Props) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.36, duration: 0.4 }}
-              className="flex flex-col items-center gap-4 mb-10"
+              className="flex flex-col items-center gap-4 mb-10 p-5 rounded-2xl border border-mint/20 bg-mint/[0.04]"
             >
               <div className="flex items-center gap-3 w-full">
-                <div className="flex-1 h-px bg-white/[0.07]" />
-                <p className="text-white/30 text-xs font-body flex-shrink-0">
+                <div className="flex-1 h-px bg-mint/20" />
+                <p className="text-mint/70 text-xs font-body font-semibold tracking-wide flex-shrink-0">
                   Share your archetype
                 </p>
-                <div className="flex-1 h-px bg-white/[0.07]" />
+                <div className="flex-1 h-px bg-mint/20" />
               </div>
 
-              <div className="flex gap-3 flex-wrap">
+              <div className="flex gap-3 flex-wrap justify-center">
                 {/* LinkedIn — clipboard + open share dialog */}
                 <button
                   onClick={handleLinkedIn}
                   className="
                     flex items-center gap-2 px-4 py-2.5 rounded-xl
-                    border border-white/10 bg-white/[0.04]
-                    text-white/50 hover:text-white hover:border-mint/30 hover:bg-white/[0.08]
+                    border border-mint/25 bg-mint/10
+                    text-mint hover:bg-mint/20 hover:border-mint/40
                     font-body text-sm transition-all duration-200
                   "
                 >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 text-mint" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                   </svg>
                   Share on LinkedIn
@@ -405,15 +406,32 @@ export default function ResultsCard({ archetype }: Props) {
                   rel="noopener noreferrer"
                   className="
                     flex items-center gap-2 px-4 py-2.5 rounded-xl
-                    border border-white/10 bg-white/[0.04]
-                    text-white/50 hover:text-white hover:border-mint/30 hover:bg-white/[0.08]
+                    border border-mint/25 bg-mint/10
+                    text-mint hover:bg-mint/20 hover:border-mint/40
                     font-body text-sm transition-all duration-200
                   "
                 >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 text-mint" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                   </svg>
                   Share on X
+                </a>
+
+                {/* Download social card */}
+                <a
+                  href={`/og/${archetype.slug}.png`}
+                  download={`${archetype.slug}-founder-archetype.png`}
+                  className="
+                    flex items-center gap-2 px-4 py-2.5 rounded-xl
+                    border border-mint/25 bg-mint/10
+                    text-mint hover:bg-mint/20 hover:border-mint/40
+                    font-body text-sm transition-all duration-200
+                  "
+                >
+                  <svg className="w-4 h-4 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                  Download card
                 </a>
               </div>
 
@@ -436,9 +454,9 @@ export default function ResultsCard({ archetype }: Props) {
               </AnimatePresence>
 
               {/* Hashtag prompt */}
-              <p className="text-white/25 text-xs font-body text-center">
+              <p className="text-mint/40 text-xs font-body text-center">
                 Tag{' '}
-                <span className="text-white/40 font-semibold">#FounderArchetype</span>
+                <span className="text-mint/60 font-semibold">#FounderArchetype</span>
                 {' '}and see how your DNA compares with your network
               </p>
             </motion.div>

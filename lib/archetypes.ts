@@ -165,7 +165,7 @@ export const archetypes: Record<BinaryCode, Archetype> = {
     secondaryArchetypes: ['Principle-led builder', 'Global-first'],
     dna: { growth: 'deliberate', decisions: 'principle', scale: 'global' },
     description:
-      'You build durable, global systems and stay true to your vision. You prioritize long-term stakeholder trust and operational rigor over short-term market wins.',
+      'You build durable, global systems and stay true to your vision. You prioritise long-term stakeholder trust and operational rigour over short-term market wins.',
     peers: [
       { name: 'Sebastian Siemiatkowski', company: 'Klarna' },
       { name: 'Melanie Perkins', company: 'Canva' },
@@ -235,7 +235,7 @@ export const archetypes: Record<BinaryCode, Archetype> = {
     secondaryArchetypes: ['Speed-first operator', 'Global-first'],
     dna: { growth: 'speed', decisions: 'conviction', scale: 'global' },
     description:
-      'You are building for a future that doesn\'t exist yet, and you\'re using every technological lever to get there first. You prioritize aggressive scale and unshakeable belief.',
+      'You are building for a future that doesn\'t exist yet, and you\'re using every technological lever to get there first. You prioritise aggressive scale and unshakeable belief.',
     peers: [
       { name: 'Sam Altman', company: 'OpenAI' },
       { name: 'Vlad Tenev', company: 'Robinhood' },
