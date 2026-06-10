@@ -7,7 +7,7 @@ import ResultsCard from '@/components/ResultsCard';
 
 type Props = {
   params: { slug: string };
-  searchParams: { name?: string; from?: string };
+  searchParams: { name?: string };
 };
 
 // Pre-render all 8 archetype result pages at build time
@@ -44,6 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           url: ogImageUrl,
           width: 1200,
           height: 630,
+          type: 'image/png',
           alt: `${archetype.name} — Aspire Founder Archetype`,
         },
       ],
@@ -64,11 +65,6 @@ export default function ResultsPage({ params, searchParams }: Props) {
   if (!archetype) {
     notFound();
   }
-
-  // ?name=  → the quiz taker's own result (used to build personalised share URLs)
-  // ?from=  → a visitor landed via someone else's shared link
-  const sharerName = searchParams.name ?? '';
-  const fromName   = searchParams.from ?? '';
 
   return (
     <main className="min-h-screen bg-near-black binary-bg flex flex-col">
@@ -93,11 +89,7 @@ export default function ResultsPage({ params, searchParams }: Props) {
 
       {/* Results content */}
       <div className="flex-1 flex items-start justify-center px-4 md:px-8 py-12 md:py-16">
-        <ResultsCard
-          archetype={archetype}
-          sharerName={sharerName}
-          fromName={fromName}
-        />
+        <ResultsCard archetype={archetype} />
       </div>
     </main>
   );

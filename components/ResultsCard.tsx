@@ -20,8 +20,6 @@ const ROMAN_NUMERALS: Record<string, string> = {
 
 type Props = {
   archetype: Archetype;
-  sharerName?: string;  // quiz taker's own name — used to build ?from= share URLs
-  fromName?: string;    // set when visitor arrived via a shared link
 };
 
 // DNA dimension labels
@@ -161,7 +159,7 @@ const PRODUCT_ICONS: Record<string, React.ReactElement> = {
 };
 
 // ── Main ResultsCard ──────────────────────────────────────────
-export default function ResultsCard({ archetype, sharerName = '', fromName = '' }: Props) {
+export default function ResultsCard({ archetype }: Props) {
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://aspireapp.com/founder-archetype-quiz';
   const [copied, setCopied] = useState(false);
 
@@ -206,22 +204,15 @@ export default function ResultsCard({ archetype, sharerName = '', fromName = '' 
     }
   };
 
-  // Share URL — includes ?from=name so visitors see personalised banner
-  const shareUrl = sharerName
-    ? `${BASE_URL}/results/${archetype.slug}?from=${encodeURIComponent(sharerName)}`
-    : `${BASE_URL}/results/${archetype.slug}`;
+  const shareUrl = `${BASE_URL}/results/${archetype.slug}`;
 
-  // X/Twitter — pre-filled tweet from the sharer's POV
-  const tweetCopy = sharerName
-    ? `I just found out I'm ${archetype.name}. ${archetype.tagline} What's your founder type? #FounderArchetype`
-    : `Just took the Aspire Founder Archetypes. I'm ${archetype.name}. ${archetype.tagline} What's yours? #FounderArchetype`;
+  // X/Twitter — pre-filled tweet
+  const tweetCopy = `Just took the Aspire Founder Archetypes. I'm ${archetype.name}. ${archetype.tagline} What's yours? #FounderArchetype`;
   const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetCopy)}&url=${encodeURIComponent(shareUrl)}`;
 
-  // Open LinkedIn feed directly — user pastes the copied text into a new post
+  // LinkedIn — copy to clipboard, open feed
   const linkedInShareUrl = 'https://www.linkedin.com/feed/';
-  const clipboardCopy = sharerName
-    ? `I just found out I'm ${archetype.name}.\n\n${archetype.tagline}\n\nFind out your founder type → ${shareUrl}\n\n#FounderArchetype`
-    : `Just took the Aspire Founder Archetypes. I'm ${archetype.name}.\n\n${archetype.tagline}\n\nFind out your founder type → ${shareUrl}\n\n#FounderArchetype`;
+  const clipboardCopy = `Just took the Aspire Founder Archetypes. I'm ${archetype.name}.\n\n${archetype.tagline}\n\nFind out your founder type → ${shareUrl}\n\n#FounderArchetype`;
 
   const handleLinkedIn = useCallback(async () => {
     // Try modern clipboard API first, fall back to execCommand for older/restricted browsers
@@ -257,37 +248,6 @@ export default function ResultsCard({ archetype, sharerName = '', fromName = '' 
 
   return (
     <div className="w-full max-w-4xl mx-auto pb-16">
-
-      {/* ── Visitor banner — shown when arrived via shared link ── */}
-      {fromName && (
-        <motion.div
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4
-            mb-8 px-5 py-4 rounded-2xl border border-mint/20 bg-mint/[0.04]"
-        >
-          <p className="font-body text-[14px] text-white/70 leading-relaxed">
-            <span className="text-mint font-semibold">{fromName}</span> is{' '}
-            <span className="text-white font-semibold">{archetype.name}</span>.
-            {' '}What type of founder are you?
-          </p>
-          <a
-            href="/quiz"
-            className="
-              flex-shrink-0 inline-flex items-center gap-2
-              bg-mint text-near-black font-display font-bold
-              text-sm px-4 py-2.5 rounded-xl
-              hover:opacity-90 transition-opacity duration-200
-            "
-          >
-            Find out yours
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </a>
-        </motion.div>
-      )}
 
       {/* ── Hero row: tarot card + archetype identity ────── */}
       <AnimatePresence>
