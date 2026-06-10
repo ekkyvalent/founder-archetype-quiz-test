@@ -211,6 +211,34 @@ export default function ResultsCard({ archetype }: Props) {
   const tweetCopy = `Just took the Aspire Founder Archetypes. I'm ${archetypeName}. ${archetype.tagline} What's yours? #FounderArchetype`;
   const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetCopy)}&url=${encodeURIComponent(shareUrl)}`;
 
+  // X/Twitter handler — Web Share API on mobile, download + open intent URL on desktop
+  const handleX = useCallback(async () => {
+    const shareCardUrl = `/share/${archetype.slug}.png`;
+
+    if (typeof navigator.share === 'function') {
+      try {
+        const imgRes = await fetch(shareCardUrl);
+        const blob = await imgRes.blob();
+        const file = new File([blob], `${archetype.slug}-founder-archetype.png`, { type: 'image/png' });
+        if (navigator.canShare?.({ files: [file] })) {
+          await navigator.share({ files: [file], text: tweetCopy });
+          return;
+        }
+      } catch {
+        // Fall through to desktop flow
+      }
+    }
+
+    // Desktop fallback: download image + open pre-filled tweet
+    const a = document.createElement('a');
+    a.href = shareCardUrl;
+    a.download = `${archetype.slug}-founder-archetype.png`;
+    a.click();
+    setTimeout(() => {
+      window.open(twitterUrl, '_blank', 'noopener,noreferrer');
+    }, 400);
+  }, [archetype.slug, tweetCopy, twitterUrl]);
+
   // LinkedIn — copy to clipboard, open feed
   const linkedInShareUrl = 'https://www.linkedin.com/feed/';
   const clipboardCopy = `Just took the Aspire Founder Archetypes. I'm ${archetypeName}.\n\n${archetype.tagline}\n\nFind out your founder type → ${shareUrl}\n\n#FounderArchetype`;
@@ -421,11 +449,9 @@ export default function ResultsCard({ archetype }: Props) {
                   Share on LinkedIn
                 </button>
 
-                {/* X/Twitter — pre-filled tweet */}
-                <a
-                  href={twitterUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                {/* X/Twitter */}
+                <button
+                  onClick={handleX}
                   className="
                     flex items-center gap-2 px-4 py-2.5 rounded-xl
                     border border-mint/25 bg-mint/10
@@ -437,7 +463,7 @@ export default function ResultsCard({ archetype }: Props) {
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                   </svg>
                   Share on X
-                </a>
+                </button>
 
                 {/* Download social card */}
                 <a
