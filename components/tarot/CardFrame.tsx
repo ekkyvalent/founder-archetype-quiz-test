@@ -63,9 +63,9 @@ export default function CardFrame({
 
   const sizeClass =
     size === 'lg'
-      ? 'w-[220px] min-h-[308px]'          // 220 × 7/5 = 308 — true poker card ratio
+      ? 'w-[220px] min-h-[308px]'
       : size === 'md'
-      ? 'w-full aspect-[5/7] min-h-[220px] sm:min-h-[280px]' // responsive 5:7 at any width
+      ? 'w-full min-h-[170px] sm:aspect-[5/7] sm:min-h-[280px]'
       : 'w-full min-h-[214px]';
 
   return (
@@ -114,27 +114,28 @@ export default function CardFrame({
       <div
         className={`
           relative flex items-center justify-center flex-1
-          mx-4 mt-${topLabel ? '1' : '5'}
+          mx-3 sm:mx-4 mt-${topLabel ? '1' : '4'} sm:mt-${topLabel ? '1' : '5'}
           rounded-lg overflow-hidden
+          ${size === 'md' ? 'min-h-[72px] sm:min-h-[110px]' : ''}
           ${isSelected ? 'bg-mint/5' : 'bg-white/[0.03]'}
           transition-colors duration-200
         `}
-        style={{ minHeight: illoMinH[size] }}
+        style={size !== 'md' ? { minHeight: illoMinH[size] } : undefined}
       >
         {/* Subtle radial glow behind illustration */}
         {isSelected && (
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,211,149,0.08),transparent_70%)]" />
         )}
-        <div className="relative w-full h-full flex items-center justify-center p-4">
+        <div className="relative w-full h-full flex items-center justify-center p-2 sm:p-4">
           {illustration}
         </div>
       </div>
 
       {/* ── Divider ──────────────────────────────────────── */}
-      <div className={`mx-4 my-3 border-t ${isSelected ? 'border-mint/25' : 'border-white/8'} transition-colors duration-200`} />
+      <div className={`mx-3 sm:mx-4 my-2 sm:my-3 border-t ${isSelected ? 'border-mint/25' : 'border-white/8'} transition-colors duration-200`} />
 
       {/* ── Label / text area ─────────────────────────── */}
-      <div className="px-4 pb-6 flex-shrink-0">
+      <div className="px-3 sm:px-4 pb-4 sm:pb-6 flex-shrink-0">
         {label}
       </div>
     </motion.div>

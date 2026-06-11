@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, animate as motionAnimate } from 'framer-motion';
 import type { Archetype } from '@/lib/archetypes';
 import { ARCHETYPE_ILLOS_BY_SLUG } from '@/components/tarot/ArchetypeIllos';
 
@@ -30,13 +30,9 @@ function CornerOrnament({ className }: { className?: string }) {
 }
 
 // ── Card back face ───────────────────────────────────────────────
-// Ornate dark face — pattern + central mark, no content revealed
 function CardBack() {
   return (
-    <div
-      className="absolute inset-0 rounded-xl overflow-hidden bg-[#111] border border-white/14 flex items-center justify-center"
-      style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' } as React.CSSProperties}
-    >
+    <div className="w-full h-full rounded-xl overflow-hidden bg-[#111] border border-white/14 flex items-center justify-center relative">
       {/* Corner ornaments */}
       <CornerOrnament className="absolute top-3.5 left-3.5 text-mint/35" />
       <CornerOrnament className="absolute top-3.5 right-3.5 text-mint/35" />
@@ -49,11 +45,9 @@ function CardBack() {
           <defs>
             <pattern id="card-back-tile" x="0" y="0" width="28" height="28"
               patternUnits="userSpaceOnUse">
-              {/* Outer diamond */}
               <rect x="14" y="0" width="10" height="10"
                 transform="rotate(45 14 5)"
                 fill="none" stroke="rgba(0,211,149,0.6)" strokeWidth="0.6" />
-              {/* Inner dot */}
               <circle cx="14" cy="14" r="1.2"
                 fill="rgba(0,211,149,0.4)" />
             </pattern>
@@ -69,7 +63,6 @@ function CardBack() {
       <div className="flex flex-col items-center gap-4 relative z-10">
         <div className="w-20 h-20 rounded-full border border-mint/18 bg-mint/[0.04] flex items-center justify-center">
           <svg viewBox="0 0 48 48" fill="none" className="w-11 h-11">
-            {/* Stylised A / triangle mark */}
             <polygon
               points="24,6 42,42 6,42"
               stroke="rgba(0,211,149,0.45)"
@@ -89,21 +82,15 @@ function CardBack() {
 }
 
 // ── Card front face ──────────────────────────────────────────────
-// Revealed archetype — same visual language as the result CardFrame
 function CardFront({ archetype }: { archetype: Archetype }) {
   const IlloComp = ARCHETYPE_ILLOS_BY_SLUG[archetype.slug] ?? (() => null);
   const roman = ROMAN[archetype.slug] ?? '';
 
   return (
     <div
-      className="absolute inset-0 rounded-xl overflow-hidden flex flex-col
+      className="relative w-full h-full rounded-xl overflow-hidden flex flex-col
         bg-[#1e281f] border border-mint
         shadow-[0_0_0_1px_#BEFFCF,0_0_56px_rgba(190,255,207,0.20)]"
-      style={{
-        backfaceVisibility: 'hidden',
-        WebkitBackfaceVisibility: 'hidden',
-        transform: 'rotateY(180deg)',
-      } as React.CSSProperties}
     >
       {/* Corner ornaments */}
       <CornerOrnament className="absolute top-3.5 left-3.5 text-mint" />
@@ -153,21 +140,26 @@ type Props = {
 
 export default function RevealCard({ archetype, onComplete }: Props) {
   const [stage, setStage] = useState<Stage>('idle');
+  const [isRevealed, setIsRevealed] = useState(false);
+  const scaleX = useMotionValue(1);
 
-  // Step 1: user clicks card
-  const handleCardClick = useCallback(() => {
+  const handleCardClick = useCallback(async () => {
     if (stage !== 'idle') return;
     setStage('flipping');
-  }, [stage]);
 
-  // Step 2: flip animation finishes → start fly-away
-  const handleFlipComplete = useCallback(() => {
-    if (stage !== 'flipping') return;
-    // Brief pause so the user can admire the front face, then fly
+    // Phase 1: squish to edge-on
+    await motionAnimate(scaleX, 0, { duration: 0.28, ease: [0.4, 0, 1, 1] });
+
+    // Swap content at midpoint
+    setIsRevealed(true);
+
+    // Phase 2: expand back revealing front face
+    await motionAnimate(scaleX, 1, { duration: 0.28, ease: [0, 0, 0.2, 1] });
+
+    // Pause so user sees their result, then fly away
     setTimeout(() => setStage('flying'), 700);
-  }, [stage]);
+  }, [stage, scaleX]);
 
-  // Step 3: fly animation finishes → hand off to parent
   const handleFlyComplete = useCallback(() => {
     onComplete();
   }, [onComplete]);
@@ -210,13 +202,13 @@ export default function RevealCard({ archetype, onComplete }: Props) {
               Your archetype is ready. Tap to reveal
             </motion.p>
           )}
-          {stage === 'flipping' && (
+          {isFlipped && isRevealed && (
             <motion.p
-              key="flipping"
+              key="revealed"
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
-              transition={{ delay: 0.3, duration: 0.35 }}
+              transition={{ duration: 0.35 }}
               className="font-body text-mint text-sm tracking-wide font-semibold"
             >
               {archetype.name}
@@ -240,28 +232,19 @@ export default function RevealCard({ archetype, onComplete }: Props) {
         onAnimationComplete={isFlying ? handleFlyComplete : undefined}
         style={{ width: 'min(260px, 75vw)', aspectRatio: '5 / 7' }}
       >
-        {/* ── 3D perspective wrapper (static) ─────────── */}
-        <div style={{ perspective: '1100px', width: '100%', height: '100%' }}>
-
-          {/* ── Flip card ───────────────────────────── */}
-          <motion.div
-            onClick={handleCardClick}
-            animate={{ rotateY: isFlipped ? 180 : 0 }}
-            transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
-            onAnimationComplete={stage === 'flipping' ? handleFlipComplete : undefined}
-            style={{
-              width: '100%',
-              height: '100%',
-              transformStyle: 'preserve-3d',
-              WebkitTransformStyle: 'preserve-3d',
-              position: 'relative',
-              cursor: stage === 'idle' ? 'pointer' : 'default',
-            }}
-          >
-            <CardBack />
-            <CardFront archetype={archetype} />
-          </motion.div>
-        </div>
+        {/* Flip card — scaleX animates 1→0→1 for the flip effect */}
+        <motion.div
+          onClick={handleCardClick}
+          style={{
+            scaleX,
+            width: '100%',
+            height: '100%',
+            position: 'relative',
+            cursor: stage === 'idle' ? 'pointer' : 'default',
+          }}
+        >
+          {isRevealed ? <CardFront archetype={archetype} /> : <CardBack />}
+        </motion.div>
       </motion.div>
 
       {/* Pulse hint — visible only when idle */}

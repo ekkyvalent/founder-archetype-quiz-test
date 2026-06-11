@@ -31,7 +31,7 @@ export default function QuestionCard({
   const labelFor = (option: typeof optionA, isSelected: boolean) => (
     <p
       className={`
-        font-body text-[13px] leading-snug text-center transition-colors duration-200
+        font-body text-[11px] sm:text-[13px] leading-snug text-center transition-colors duration-200
         ${isSelected ? 'text-white font-semibold' : 'text-white/80'}
       `}
     >
@@ -82,9 +82,9 @@ export default function QuestionCard({
           animate={{ opacity: 1 }}
           transition={{ delay: 0.15, duration: 0.3 }}
         >
-          <div className="w-px h-8 bg-white/10" />
-          <span className="font-display text-[10px] font-bold text-white/22">or</span>
-          <div className="w-px h-8 bg-white/10" />
+          <div className="w-px h-6 sm:h-8 bg-white/15" />
+          <span className="font-display text-[10px] font-bold text-white/40">or</span>
+          <div className="w-px h-6 sm:h-8 bg-white/15" />
         </motion.div>
 
         {/* Card B */}
