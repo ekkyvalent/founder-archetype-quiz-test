@@ -208,7 +208,7 @@ export default function ResultsCard({ archetype }: Props) {
 
   // X/Twitter — pre-filled tweet
   const archetypeName = archetype.name.charAt(0).toLowerCase() + archetype.name.slice(1);
-  const tweetCopy = `Just took the Aspire Founder Archetypes. I'm ${archetypeName}. ${archetype.tagline} What's yours? #FounderArchetype`;
+  const tweetCopy = `Just took the Aspire Founder Archetypes quiz. I'm ${archetypeName}. ${archetype.tagline} I nominate (insert 3 names) to take this quiz. What's yours? #FounderArchetype`;
   const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetCopy)}&url=${encodeURIComponent(shareUrl)}`;
 
   // X/Twitter handler — Web Share API on mobile, download + open intent URL on desktop
