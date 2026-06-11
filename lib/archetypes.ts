@@ -61,7 +61,7 @@ export const archetypes: Record<BinaryCode, Archetype> = {
     secondaryArchetypes: ['Steward of the future', 'Principle-led builder'],
     dna: { growth: 'deliberate', decisions: 'conviction', scale: 'lean' },
     description:
-      'You build in silence and optimize for durability. You aren\'t interested in the hype cycle. You\'re interested in building a foundation that is statistically impossible to break.',
+      'You build in silence and optimise for durability. You aren\'t interested in the hype cycle. You\'re interested in building a foundation that is statistically impossible to break.',
     peers: [
       { name: 'Melanie Perkins', company: 'Canva' },
       { name: 'Anthony Tan', company: 'Early stage - Grab' },
@@ -131,7 +131,7 @@ export const archetypes: Record<BinaryCode, Archetype> = {
     secondaryArchetypes: ['Pragmatic expander', 'Lean-operator'],
     dna: { growth: 'deliberate', decisions: 'principle', scale: 'lean' },
     description:
-      'You are guided by taste and principles. You would rather have a small, elite team building the right thing than a massive organization building the noisy thing.',
+      'You are guided by taste and principles. You would rather have a small, elite team building the right thing than a massive organisation building the noisy thing.',
     peers: [
       { name: 'Dylan Field', company: 'Figma' },
     ],

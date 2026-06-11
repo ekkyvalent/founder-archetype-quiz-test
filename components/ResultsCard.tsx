@@ -242,7 +242,7 @@ export default function ResultsCard({ archetype }: Props) {
 
   // LinkedIn — copy to clipboard, open feed
   const linkedInShareUrl = 'https://www.linkedin.com/feed/';
-  const clipboardCopy = `Just took the Aspire Founder Archetypes. I'm ${archetypeName}.\n\n${archetype.tagline}\n\nFind out your founder type → ${shareUrl}\n\n#FounderArchetype`;
+  const clipboardCopy = `Just took the Aspire Founder Archetypes quiz. I'm ${archetypeName}.\n\n${archetype.tagline}\n\nI nominate (insert 3 names) to take this quiz.\n\nFind out your founder type → ${shareUrl}\n\n#FounderArchetype`;
 
   const handleLinkedIn = useCallback(async () => {
     const shareCardUrl = `/share/${archetype.slug}.png`;
@@ -272,8 +272,7 @@ export default function ResultsCard({ archetype }: Props) {
     setCopied(true);
     setTimeout(() => {
       window.open(linkedInShareUrl, '_blank', 'noopener,noreferrer');
-    }, 8000);
-    setTimeout(() => setCopied(false), 8000);
+    }, 4000);
   }, [archetype.slug, clipboardCopy, linkedInShareUrl]);
 
   const dnaValues = {
