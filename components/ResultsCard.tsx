@@ -246,25 +246,11 @@ export default function ResultsCard({ archetype }: Props) {
 
   const handleLinkedIn = useCallback(async () => {
     const shareCardUrl = `/share/${archetype.slug}.png`;
-    const isMobile = navigator.maxTouchPoints > 0;
 
-    // Mobile: Web Share API opens the native share sheet with image + caption in one tap
-    if (isMobile && typeof navigator.share === 'function') {
-      try {
-        const imgRes = await fetch(shareCardUrl);
-        const blob = await imgRes.blob();
-        const file = new File([blob], `${archetype.slug}-founder-archetype.png`, { type: 'image/png' });
+    // LinkedIn drops image attachments from the share sheet on mobile,
+    // so we use the same flow on all devices: download image + copy caption + open feed.
 
-        if (navigator.canShare?.({ files: [file] })) {
-          await navigator.share({ files: [file], text: clipboardCopy });
-          return;
-        }
-      } catch {
-        // Fall through to desktop flow if Web Share fails
-      }
-    }
-
-    // Desktop fallback: copy caption to clipboard + open LinkedIn feed
+    // Copy caption to clipboard
     try {
       await navigator.clipboard.writeText(clipboardCopy);
     } catch {
@@ -286,7 +272,7 @@ export default function ResultsCard({ archetype }: Props) {
     setCopied(true);
     setTimeout(() => {
       window.open(linkedInShareUrl, '_blank', 'noopener,noreferrer');
-    }, 2800);
+    }, 8000);
     setTimeout(() => setCopied(false), 8000);
   }, [archetype.slug, clipboardCopy, linkedInShareUrl]);
 
@@ -498,7 +484,7 @@ export default function ResultsCard({ archetype }: Props) {
                     <svg className="w-3.5 h-3.5 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                     </svg>
-                    Caption copied to clipboard. Image saved to Downloads — paste the caption, then attach the image to your post.
+                    Caption copied — image downloading now. Open LinkedIn, create a post, paste the caption, then attach the image from your Downloads or camera roll.
                   </motion.div>
                 )}
               </AnimatePresence>
