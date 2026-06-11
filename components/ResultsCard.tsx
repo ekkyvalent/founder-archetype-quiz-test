@@ -214,8 +214,9 @@ export default function ResultsCard({ archetype }: Props) {
   // X/Twitter handler — Web Share API on mobile, download + open intent URL on desktop
   const handleX = useCallback(async () => {
     const shareCardUrl = `/share/${archetype.slug}.png`;
+    const isMobile = navigator.maxTouchPoints > 0;
 
-    if (typeof navigator.share === 'function') {
+    if (isMobile && typeof navigator.share === 'function') {
       try {
         const imgRes = await fetch(shareCardUrl);
         const blob = await imgRes.blob();
@@ -229,7 +230,7 @@ export default function ResultsCard({ archetype }: Props) {
       }
     }
 
-    // Desktop fallback: download image + open pre-filled tweet
+    // Desktop: download image + open pre-filled tweet
     const a = document.createElement('a');
     a.href = shareCardUrl;
     a.download = `${archetype.slug}-founder-archetype.png`;
@@ -245,9 +246,10 @@ export default function ResultsCard({ archetype }: Props) {
 
   const handleLinkedIn = useCallback(async () => {
     const shareCardUrl = `/share/${archetype.slug}.png`;
+    const isMobile = navigator.maxTouchPoints > 0;
 
-    // On mobile: Web Share API opens the native share sheet with image + caption in one tap
-    if (typeof navigator.share === 'function') {
+    // Mobile: Web Share API opens the native share sheet with image + caption in one tap
+    if (isMobile && typeof navigator.share === 'function') {
       try {
         const imgRes = await fetch(shareCardUrl);
         const blob = await imgRes.blob();
