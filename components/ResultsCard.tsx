@@ -286,8 +286,8 @@ export default function ResultsCard({ archetype }: Props) {
     setCopied(true);
     setTimeout(() => {
       window.open(linkedInShareUrl, '_blank', 'noopener,noreferrer');
-    }, 1500);
-    setTimeout(() => setCopied(false), 6000);
+    }, 2800);
+    setTimeout(() => setCopied(false), 8000);
   }, [archetype.slug, clipboardCopy, linkedInShareUrl]);
 
   const dnaValues = {
@@ -498,7 +498,7 @@ export default function ResultsCard({ archetype }: Props) {
                     <svg className="w-3.5 h-3.5 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                     </svg>
-                    Caption copied + image downloading — paste and attach in your LinkedIn post
+                    Caption copied to clipboard. Image saved to Downloads — paste the caption, then attach the image to your post.
                   </motion.div>
                 )}
               </AnimatePresence>
