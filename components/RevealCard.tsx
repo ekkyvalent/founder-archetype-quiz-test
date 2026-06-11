@@ -35,7 +35,7 @@ function CardBack() {
   return (
     <div
       className="absolute inset-0 rounded-xl overflow-hidden bg-[#111] border border-white/14 flex items-center justify-center"
-      style={{ backfaceVisibility: 'hidden' } as React.CSSProperties}
+      style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' } as React.CSSProperties}
     >
       {/* Corner ornaments */}
       <CornerOrnament className="absolute top-3.5 left-3.5 text-mint/35" />
@@ -101,6 +101,7 @@ function CardFront({ archetype }: { archetype: Archetype }) {
         shadow-[0_0_0_1px_#BEFFCF,0_0_56px_rgba(190,255,207,0.20)]"
       style={{
         backfaceVisibility: 'hidden',
+        WebkitBackfaceVisibility: 'hidden',
         transform: 'rotateY(180deg)',
       } as React.CSSProperties}
     >
@@ -252,6 +253,7 @@ export default function RevealCard({ archetype, onComplete }: Props) {
               width: '100%',
               height: '100%',
               transformStyle: 'preserve-3d',
+              WebkitTransformStyle: 'preserve-3d',
               position: 'relative',
               cursor: stage === 'idle' ? 'pointer' : 'default',
             }}

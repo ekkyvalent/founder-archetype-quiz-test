@@ -307,15 +307,15 @@ export default function ResultsCard({ archetype }: Props) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
-          {/* Side-by-side layout at all breakpoints */}
-          <div className="flex flex-row gap-6 md:gap-10 items-start mb-12">
+          {/* Stacks vertically on mobile, side-by-side on sm+ */}
+          <div className="flex flex-col sm:flex-row gap-6 md:gap-10 items-start mb-12">
 
             {/* ── Tarot card (fixed width) ─────────────── */}
             <motion.div
               initial={{ opacity: 0, scale: 0.92, y: 16 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="flex-shrink-0"
+              className="flex-shrink-0 self-center sm:self-auto"
             >
               <CardFrame
                 illustration={<IlloComp />}
