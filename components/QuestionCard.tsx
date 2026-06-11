@@ -54,11 +54,11 @@ export default function QuestionCard({
       </h2>
 
       {/* ── Tarot card layout ───────────────────────────────── */}
-      <div className="flex flex-col sm:flex-row items-center gap-0 sm:gap-3">
+      <div className="flex items-center gap-2 sm:gap-3">
 
         {/* Card A */}
         <motion.div
-          className="w-full sm:flex-1"
+          className="flex-1"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0, duration: 0.30, ease: [0.22, 1, 0.36, 1] }}
@@ -75,28 +75,21 @@ export default function QuestionCard({
           )}
         </motion.div>
 
-        {/* OR divider — horizontal between stacked cards on mobile */}
-        <div className="flex sm:hidden items-center gap-3 w-full my-4 select-none">
-          <div className="flex-1 h-px bg-white/10" />
-          <span className="font-display text-[10px] font-bold text-white/22">or</span>
-          <div className="flex-1 h-px bg-white/10" />
-        </div>
-
-        {/* OR divider — vertical between side-by-side cards on desktop */}
+        {/* OR divider */}
         <motion.div
+          className="flex flex-col items-center gap-2 flex-shrink-0 select-none"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.15, duration: 0.3 }}
-          className="hidden sm:flex flex-col items-center gap-2 flex-shrink-0 px-1 select-none"
         >
-          <div className="w-px h-10 bg-white/10" />
+          <div className="w-px h-8 bg-white/10" />
           <span className="font-display text-[10px] font-bold text-white/22">or</span>
-          <div className="w-px h-10 bg-white/10" />
+          <div className="w-px h-8 bg-white/10" />
         </motion.div>
 
         {/* Card B */}
         <motion.div
-          className="w-full sm:flex-1"
+          className="flex-1"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.08, duration: 0.30, ease: [0.22, 1, 0.36, 1] }}

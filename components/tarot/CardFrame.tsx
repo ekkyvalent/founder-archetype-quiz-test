@@ -48,7 +48,7 @@ type CardFrameProps = {
 };
 
 // Illustration area min-height by size
-const illoMinH = { sm: '110px', md: '160px', lg: '155px' };
+const illoMinH = { sm: '90px', md: '110px', lg: '155px' };
 
 export default function CardFrame({
   illustration,
