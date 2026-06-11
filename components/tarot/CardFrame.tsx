@@ -65,7 +65,7 @@ export default function CardFrame({
     size === 'lg'
       ? 'w-[220px] min-h-[308px]'          // 220 × 7/5 = 308 — true poker card ratio
       : size === 'md'
-      ? 'w-full aspect-[5/7] min-h-[280px]' // responsive 5:7 at any width
+      ? 'w-full aspect-[5/7] min-h-[220px] sm:min-h-[280px]' // responsive 5:7 at any width
       : 'w-full min-h-[214px]';
 
   return (
