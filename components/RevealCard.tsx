@@ -238,7 +238,7 @@ export default function RevealCard({ archetype, onComplete }: Props) {
             : {}
         }
         onAnimationComplete={isFlying ? handleFlyComplete : undefined}
-        style={{ width: 260, height: 400 }}
+        style={{ width: 'min(260px, 75vw)', aspectRatio: '5 / 7' }}
       >
         {/* ── 3D perspective wrapper (static) ─────────── */}
         <div style={{ perspective: '1100px', width: '100%', height: '100%' }}>
