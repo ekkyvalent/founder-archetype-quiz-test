@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Archetype } from '@/lib/archetypes';
 import CardFrame from '@/components/tarot/CardFrame';
@@ -162,6 +162,13 @@ const PRODUCT_ICONS: Record<string, React.ReactElement> = {
 export default function ResultsCard({ archetype }: Props) {
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://aspireapp.com/founder-archetype-quiz';
   const [copied, setCopied] = useState(false);
+  const linkedInTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (linkedInTimerRef.current) clearTimeout(linkedInTimerRef.current);
+    };
+  }, []);
 
   // Download report email capture
   const [showEmailForm, setShowEmailForm] = useState(false);
@@ -173,6 +180,7 @@ export default function ResultsCard({ archetype }: Props) {
 
   const handleReportSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (reportLoading) return;
     setReportError('');
 
     if (!reportFirstName.trim()) {
@@ -186,7 +194,7 @@ export default function ResultsCard({ archetype }: Props) {
 
     setReportLoading(true);
     try {
-      await fetch('/api/submit-lead', {
+      const res = await fetch('/api/submit-lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -196,6 +204,7 @@ export default function ResultsCard({ archetype }: Props) {
           source: 'founder-quiz-report',
         }),
       });
+      if (!res.ok) throw new Error(`API error ${res.status}`);
       setReportSubmitted(true);
     } catch {
       setReportError('Something went wrong. Please try again.');
@@ -225,6 +234,9 @@ export default function ResultsCard({ archetype }: Props) {
           await navigator.share({ files: [file], text: tweetCopy });
           return;
         }
+        // Device supports share but not file sharing — share text + URL only
+        await navigator.share({ text: tweetCopy, url: shareUrl });
+        return;
       } catch {
         // Fall through to desktop flow
       }
@@ -270,7 +282,7 @@ export default function ResultsCard({ archetype }: Props) {
     a.click();
 
     setCopied(true);
-    setTimeout(() => {
+    linkedInTimerRef.current = setTimeout(() => {
       window.open(linkedInShareUrl, '_blank', 'noopener,noreferrer');
     }, 4000);
   }, [archetype.slug, clipboardCopy, linkedInShareUrl]);
@@ -483,7 +495,7 @@ export default function ResultsCard({ archetype }: Props) {
                     <svg className="w-3.5 h-3.5 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                     </svg>
-                    Caption copied — image downloading now. Open LinkedIn, create a post, paste the caption, then attach the image from your Downloads or camera roll.
+                    Caption copied — image downloading now. Open LinkedIn, create a post, attach the image from your Downloads or camera roll, then paste the caption.
                   </motion.div>
                 )}
               </AnimatePresence>

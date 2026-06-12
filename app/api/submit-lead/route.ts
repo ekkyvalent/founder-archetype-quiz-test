@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
-  const { email, firstName, archetype, source } = await req.json();
+  let email: string, firstName: string, archetype: string, source: string;
+  try {
+    ({ email, firstName, archetype, source } = await req.json());
+  } catch {
+    return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
+  }
 
   if (!email || !archetype) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });

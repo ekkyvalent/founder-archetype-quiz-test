@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, animate as motionAnimate } from 'framer-motion';
 import type { Archetype } from '@/lib/archetypes';
 import { ARCHETYPE_ILLOS_BY_SLUG } from '@/components/tarot/ArchetypeIllos';
@@ -142,22 +142,34 @@ export default function RevealCard({ archetype, onComplete }: Props) {
   const [stage, setStage] = useState<Stage>('idle');
   const [isRevealed, setIsRevealed] = useState(false);
   const scaleX = useMotionValue(1);
+  const flyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (flyTimerRef.current) clearTimeout(flyTimerRef.current);
+    };
+  }, []);
 
   const handleCardClick = useCallback(async () => {
     if (stage !== 'idle') return;
     setStage('flipping');
 
-    // Phase 1: squish to edge-on
-    await motionAnimate(scaleX, 0, { duration: 0.28, ease: [0.4, 0, 1, 1] });
+    try {
+      // Phase 1: squish to edge-on
+      await motionAnimate(scaleX, 0, { duration: 0.28, ease: [0.4, 0, 1, 1] });
 
-    // Swap content at midpoint
-    setIsRevealed(true);
+      // Swap content at midpoint
+      setIsRevealed(true);
 
-    // Phase 2: expand back revealing front face
-    await motionAnimate(scaleX, 1, { duration: 0.28, ease: [0, 0, 0.2, 1] });
+      // Phase 2: expand back revealing front face
+      await motionAnimate(scaleX, 1, { duration: 0.28, ease: [0, 0, 0.2, 1] });
 
-    // Pause so user sees their result, then fly away
-    setTimeout(() => setStage('flying'), 700);
+      // Pause so user sees their result, then fly away
+      flyTimerRef.current = setTimeout(() => setStage('flying'), 700);
+    } catch {
+      // Animation interrupted (e.g. unmount) — reset gracefully
+      setStage('idle');
+    }
   }, [stage, scaleX]);
 
   const handleFlyComplete = useCallback(() => {
