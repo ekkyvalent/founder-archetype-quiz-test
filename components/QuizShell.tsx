@@ -125,6 +125,13 @@ export default function QuizShell() {
                 exit={{ opacity: 0, y: -16 }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
               >
+                {/* ── Banner placeholder (swap for design PNG, 4:1 ratio) ── */}
+                <div className="w-full aspect-[4/1] rounded-xl bg-white/[0.06] border border-white/10 flex items-center justify-center mb-8">
+                  <span className="font-body text-xs tracking-wide text-white/30">
+                    Banner placeholder
+                  </span>
+                </div>
+
                 {/* Eyebrow */}
                 <motion.div
                   initial={{ opacity: 0 }}
