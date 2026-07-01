@@ -108,7 +108,7 @@ export default function QuestionCard({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ delay: 0.6, duration: 0.4 }}
-          className="text-center text-white/25 text-xs font-body mt-6"
+          className="text-center text-mint/60 text-xs font-body mt-6"
         >
           Choose a card to advance
         </motion.p>

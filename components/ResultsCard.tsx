@@ -242,35 +242,54 @@ export default function ResultsCard({ archetype }: Props) {
   const linkedInShareUrl = 'https://www.linkedin.com/feed/';
   const clipboardCopy = `Just took the Aspire Founder Archetypes quiz. I'm ${archetypeName}.\n\n${archetype.tagline}\n\nI nominate (insert 3 names) to take this quiz.\n\nFind out your founder type → ${shareUrl}\n\n#FounderArchetype`;
 
-  const handleLinkedIn = useCallback(async () => {
+  const handleLinkedIn = useCallback(() => {
     const shareCardUrl = `/share/${archetype.slug}.png`;
 
     // LinkedIn drops image attachments from the share sheet on mobile,
     // so we use the same flow on all devices: download image + copy caption + open feed.
 
-    // Copy caption to clipboard
-    try {
-      await navigator.clipboard.writeText(clipboardCopy);
-    } catch {
-      const textarea = document.createElement('textarea');
-      textarea.value = clipboardCopy;
-      textarea.style.cssText = 'position:fixed;top:0;left:0;opacity:0;pointer-events:none';
-      document.body.appendChild(textarea);
-      textarea.focus();
-      textarea.select();
-      try { document.execCommand('copy'); } finally { document.body.removeChild(textarea); }
+    // Open the tab SYNCHRONOUSLY, inside the click handler, before any
+    // await. Mobile browsers (iOS Safari in particular) only allow
+    // window.open to succeed as a direct result of a user gesture — once
+    // it's behind an await/setTimeout it gets silently popup-blocked.
+    // We navigate this already-open tab later once the async work is done.
+    const linkedInWindow = window.open('', '_blank');
+    if (linkedInWindow) {
+      // Same-origin (about:blank) at this point, so this is safe — it
+      // strips window.opener before we hand the tab off to linkedin.com.
+      linkedInWindow.opener = null;
     }
 
-    // Also trigger image download so it's ready to attach
-    const a = document.createElement('a');
-    a.href = shareCardUrl;
-    a.download = `${archetype.slug}-founder-archetype.png`;
-    a.click();
+    (async () => {
+      // Copy caption to clipboard
+      try {
+        await navigator.clipboard.writeText(clipboardCopy);
+      } catch {
+        const textarea = document.createElement('textarea');
+        textarea.value = clipboardCopy;
+        textarea.style.cssText = 'position:fixed;top:0;left:0;opacity:0;pointer-events:none';
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        try { document.execCommand('copy'); } finally { document.body.removeChild(textarea); }
+      }
 
-    setCopied(true);
-    linkedInTimerRef.current = setTimeout(() => {
-      window.open(linkedInShareUrl, '_blank', 'noopener,noreferrer');
-    }, 4000);
+      // Also trigger image download so it's ready to attach
+      const a = document.createElement('a');
+      a.href = shareCardUrl;
+      a.download = `${archetype.slug}-founder-archetype.png`;
+      a.click();
+
+      setCopied(true);
+      linkedInTimerRef.current = setTimeout(() => {
+        if (linkedInWindow && !linkedInWindow.closed) {
+          linkedInWindow.location.href = linkedInShareUrl;
+        } else {
+          // Pre-open itself got blocked (rare) — best-effort fallback.
+          window.open(linkedInShareUrl, '_blank', 'noopener,noreferrer');
+        }
+      }, 4000);
+    })();
   }, [archetype.slug, clipboardCopy, linkedInShareUrl]);
 
   const dnaValues = {
