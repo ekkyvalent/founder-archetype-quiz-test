@@ -3,20 +3,6 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Archetype } from '@/lib/archetypes';
-import CardFrame from '@/components/tarot/CardFrame';
-import { ARCHETYPE_ILLOS_BY_SLUG } from '@/components/tarot/ArchetypeIllos';
-
-// Roman numeral for each archetype (I–VIII) by slug
-const ROMAN_NUMERALS: Record<string, string> = {
-  'stealth-architect':    'I',
-  'visionary-pathfinder': 'II',
-  'product-purist':       'III',
-  'anchored-scaler':      'IV',
-  'hustler':              'V',
-  'solo-visionary':       'VI',
-  'tinkerer':             'VII',
-  'global-trailblazer':   'VIII',
-};
 
 type Props = {
   archetype: Archetype;
@@ -293,9 +279,6 @@ export default function ResultsCard({ archetype }: Props) {
     scale: archetype.dna.scale === 'global' ? 1 : 0,
   } as const;
 
-  const IlloComp = ARCHETYPE_ILLOS_BY_SLUG[archetype.slug] ?? (() => null);
-  const romanNumeral = ROMAN_NUMERALS[archetype.slug] ?? '';
-
   return (
     <div className="w-full max-w-4xl mx-auto pb-16">
 
@@ -316,17 +299,13 @@ export default function ResultsCard({ archetype }: Props) {
               transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
               className="flex-shrink-0 self-center sm:self-auto"
             >
-              <CardFrame
-                illustration={<IlloComp />}
-                label={
-                  <p className="font-display font-bold text-sm text-white text-center tracking-wide">
-                    {archetype.name}
-                  </p>
-                }
-                topLabel={romanNumeral}
-                isSelected
-                size="lg"
-              />
+              <div className="w-[220px] aspect-[5/7] rounded-xl overflow-hidden shadow-[0_0_0_1px_#BEFFCF,0_0_56px_rgba(190,255,207,0.20)]">
+                <img
+                  src={`/cards/${archetype.slug}.png`}
+                  alt={archetype.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </motion.div>
 
             {/* ── Archetype identity text ──────────────── */}

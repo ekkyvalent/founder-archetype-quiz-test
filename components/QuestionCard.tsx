@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import type { Question } from '@/lib/quiz-data';
 import CardFrame from '@/components/tarot/CardFrame';
-import { QUESTION_ILLOS } from '@/components/tarot/QuestionIllos';
 
 type Props = {
   question: Question;
@@ -18,9 +17,6 @@ export default function QuestionCard({
   selectedOption,
   onAnswer,
 }: Props) {
-  const illos = QUESTION_ILLOS[question.id] ?? [() => null, () => null];
-  const [IlloA, IlloB] = illos;
-
   const optionA = question.options[0];
   const optionB = question.options[1];
 
@@ -31,7 +27,7 @@ export default function QuestionCard({
   const labelFor = (option: typeof optionA, isSelected: boolean) => (
     <p
       className={`
-        font-body text-[11px] sm:text-[13px] leading-snug text-center transition-colors duration-200
+        font-body text-sm sm:text-base leading-snug text-center transition-colors duration-200
         ${isSelected ? 'text-white font-semibold' : 'text-white/80'}
       `}
     >
@@ -65,7 +61,6 @@ export default function QuestionCard({
         >
           {optionA && (
             <CardFrame
-              illustration={<IlloA />}
               label={labelFor(optionA, isASelected)}
               isSelected={isASelected}
               isOtherSelected={hasSelection && !isASelected}
@@ -96,7 +91,6 @@ export default function QuestionCard({
         >
           {optionB && (
             <CardFrame
-              illustration={<IlloB />}
               label={labelFor(optionB, isBSelected)}
               isSelected={isBSelected}
               isOtherSelected={hasSelection && !isBSelected}

@@ -3,129 +3,29 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, animate as motionAnimate } from 'framer-motion';
 import type { Archetype } from '@/lib/archetypes';
-import { ARCHETYPE_ILLOS_BY_SLUG } from '@/components/tarot/ArchetypeIllos';
-
-// ── Roman numerals ───────────────────────────────────────────────
-const ROMAN: Record<string, string> = {
-  'stealth-architect':    'I',
-  'visionary-pathfinder': 'II',
-  'product-purist':       'III',
-  'anchored-scaler':      'IV',
-  'hustler':              'V',
-  'solo-visionary':       'VI',
-  'tinkerer':             'VII',
-  'global-trailblazer':   'VIII',
-};
-
-// ── Shared corner ornament ───────────────────────────────────────
-function CornerOrnament({ className }: { className?: string }) {
-  return (
-    <svg width="16" height="16" viewBox="0 0 14 14" fill="none" className={className}>
-      <rect x="2.5" y="2.5" width="9" height="9" transform="rotate(45 7 7)"
-        stroke="currentColor" strokeWidth="1" />
-      <rect x="5" y="5" width="4" height="4" transform="rotate(45 7 7)"
-        fill="currentColor" />
-    </svg>
-  );
-}
 
 // ── Card back face ───────────────────────────────────────────────
 function CardBack() {
   return (
-    <div className="w-full h-full rounded-xl overflow-hidden bg-[#111] border border-white/14 flex items-center justify-center relative">
-      {/* Corner ornaments */}
-      <CornerOrnament className="absolute top-3.5 left-3.5 text-mint/35" />
-      <CornerOrnament className="absolute top-3.5 right-3.5 text-mint/35" />
-      <CornerOrnament className="absolute bottom-3.5 left-3.5 text-mint/35" />
-      <CornerOrnament className="absolute bottom-3.5 right-3.5 text-mint/35" />
-
-      {/* Repeating diamond tile */}
-      <div className="absolute inset-5 rounded-lg overflow-hidden opacity-25">
-        <svg width="100%" height="100%">
-          <defs>
-            <pattern id="card-back-tile" x="0" y="0" width="28" height="28"
-              patternUnits="userSpaceOnUse">
-              <rect x="14" y="0" width="10" height="10"
-                transform="rotate(45 14 5)"
-                fill="none" stroke="rgba(0,211,149,0.6)" strokeWidth="0.6" />
-              <circle cx="14" cy="14" r="1.2"
-                fill="rgba(0,211,149,0.4)" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#card-back-tile)" />
-        </svg>
-      </div>
-
-      {/* Radial glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,211,149,0.06),transparent_65%)]" />
-
-      {/* Central mark */}
-      <div className="flex flex-col items-center gap-4 relative z-10">
-        <div className="w-20 h-20 rounded-full border border-mint/18 bg-mint/[0.04] flex items-center justify-center">
-          <svg viewBox="0 0 48 48" fill="none" className="w-11 h-11">
-            <polygon
-              points="24,6 42,42 6,42"
-              stroke="rgba(0,211,149,0.45)"
-              strokeWidth="1.5"
-              strokeLinejoin="round"
-            />
-            <line x1="12" y1="32" x2="36" y2="32"
-              stroke="rgba(0,211,149,0.45)" strokeWidth="1.5" strokeLinecap="round" />
-          </svg>
-        </div>
-        <p className="font-display text-[10px] tracking-wide text-white/18 font-semibold">
-          Your archetype awaits
-        </p>
-      </div>
+    <div className="w-full h-full rounded-xl overflow-hidden shadow-[0_0_40px_rgba(190,255,207,0.12)]">
+      <img
+        src="/cards/card-back.png"
+        alt="Your archetype awaits"
+        className="w-full h-full object-cover"
+      />
     </div>
   );
 }
 
 // ── Card front face ──────────────────────────────────────────────
 function CardFront({ archetype }: { archetype: Archetype }) {
-  const IlloComp = ARCHETYPE_ILLOS_BY_SLUG[archetype.slug] ?? (() => null);
-  const roman = ROMAN[archetype.slug] ?? '';
-
   return (
-    <div
-      className="relative w-full h-full rounded-xl overflow-hidden flex flex-col
-        bg-[#1e281f] border border-mint
-        shadow-[0_0_0_1px_#BEFFCF,0_0_56px_rgba(190,255,207,0.20)]"
-    >
-      {/* Corner ornaments */}
-      <CornerOrnament className="absolute top-3.5 left-3.5 text-mint" />
-      <CornerOrnament className="absolute top-3.5 right-3.5 text-mint" />
-      <CornerOrnament className="absolute bottom-3.5 left-3.5 text-mint" />
-      <CornerOrnament className="absolute bottom-3.5 right-3.5 text-mint" />
-
-      {/* Roman numeral */}
-      <div className="flex justify-center pt-6 pb-1">
-        <span className="font-display font-bold text-sm tracking-[0.22em] text-mint">
-          {roman}
-        </span>
-      </div>
-
-      {/* Illustration */}
-      <div className="flex-1 mx-5 mt-2 rounded-lg bg-mint/5 flex items-center justify-center
-        overflow-hidden relative">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,211,149,0.10),transparent_70%)]" />
-        <div className="relative w-full h-full flex items-center justify-center p-5">
-          <IlloComp />
-        </div>
-      </div>
-
-      {/* Divider */}
-      <div className="mx-5 my-3 border-t border-mint/25" />
-
-      {/* Name + tagline */}
-      <div className="px-5 pb-7 text-center flex-shrink-0">
-        <p className="font-display font-bold text-base text-white tracking-wide leading-tight">
-          {archetype.name}
-        </p>
-        <p className="font-body text-mint/75 text-xs mt-1.5 leading-relaxed">
-          {archetype.tagline}
-        </p>
-      </div>
+    <div className="w-full h-full rounded-xl overflow-hidden shadow-[0_0_0_1px_#BEFFCF,0_0_56px_rgba(190,255,207,0.20)]">
+      <img
+        src={`/cards/${archetype.slug}.png`}
+        alt={archetype.name}
+        className="w-full h-full object-cover"
+      />
     </div>
   );
 }

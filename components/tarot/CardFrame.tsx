@@ -2,58 +2,30 @@
 
 import { motion } from 'framer-motion';
 
-// ── Corner ornament ─────────────────────────────────────────
-function CornerOrnament({ className }: { className?: string }) {
+// ── Selected checkmark badge ─────────────────────────────────
+function CheckBadge() {
   return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 14 14"
-      fill="none"
-      className={className}
-    >
-      <rect
-        x="2.5"
-        y="2.5"
-        width="9"
-        height="9"
-        transform="rotate(45 7 7)"
-        stroke="currentColor"
-        strokeWidth="1"
-      />
-      <rect
-        x="5"
-        y="5"
-        width="4"
-        height="4"
-        transform="rotate(45 7 7)"
-        fill="currentColor"
-      />
-    </svg>
+    <div className="w-9 h-9 rounded-full bg-mint flex items-center justify-center flex-shrink-0">
+      <svg className="w-4.5 h-4.5 text-near-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+      </svg>
+    </div>
   );
 }
 
-// ── Tarot card frame ─────────────────────────────────────────
+// ── Question option card frame ────────────────────────────────
+// Text-only: no illustration, no ornaments — just the frame,
+// an optional selected checkmark, and centred label copy.
 type CardFrameProps = {
-  illustration: React.ReactNode;
-  label: React.ReactNode;          // bottom text (option text or archetype name)
-  topLabel?: React.ReactNode;      // optional top centre (roman numeral for result)
+  label: React.ReactNode;
   isSelected?: boolean;
   isOtherSelected?: boolean;
   onClick?: () => void;
   size?: 'sm' | 'md' | 'lg';
-  // sm = compact fallback
-  // md = question cards (full-width, tall — matches lg card height)
-  // lg = result card (fixed width 220px)
 };
 
-// Illustration area min-height by size
-const illoMinH = { sm: '90px', md: '110px', lg: '155px' };
-
 export default function CardFrame({
-  illustration,
   label,
-  topLabel,
   isSelected = false,
   isOtherSelected = false,
   onClick,
@@ -76,7 +48,8 @@ export default function CardFrame({
       whileTap={isClickable ? { scale: 0.97 } : {}}
       transition={{ duration: 0.2, ease: 'easeOut' }}
       className={`
-        relative flex flex-col
+        relative flex flex-col items-center justify-center text-center
+        gap-4 px-4 sm:px-5 py-6
         rounded-xl overflow-hidden
         border transition-all duration-250
         ${sizeClass}
@@ -87,55 +60,10 @@ export default function CardFrame({
         }
       `}
     >
-      {/* ── Corner ornaments ─────────────────────────────── */}
-      <CornerOrnament
-        className={`absolute top-2.5 left-2.5 ${isSelected ? 'text-mint' : 'text-white/20'} transition-colors duration-200`}
-      />
-      <CornerOrnament
-        className={`absolute top-2.5 right-2.5 ${isSelected ? 'text-mint' : 'text-white/20'} transition-colors duration-200`}
-      />
-      <CornerOrnament
-        className={`absolute bottom-2.5 left-2.5 ${isSelected ? 'text-mint' : 'text-white/20'} transition-colors duration-200`}
-      />
-      <CornerOrnament
-        className={`absolute bottom-2.5 right-2.5 ${isSelected ? 'text-mint' : 'text-white/20'} transition-colors duration-200`}
-      />
+      {isSelected && <CheckBadge />}
 
-      {/* ── Top label (roman numeral for result card) ──── */}
-      {topLabel && (
-        <div className="flex justify-center pt-5 pb-1">
-          <span className={`font-display font-bold text-xs tracking-[0.2em] ${isSelected ? 'text-mint' : 'text-white/30'} transition-colors duration-200`}>
-            {topLabel}
-          </span>
-        </div>
-      )}
-
-      {/* ── Illustration area ─────────────────────────── */}
-      <div
-        className={`
-          relative flex items-center justify-center flex-1
-          mx-3 sm:mx-4 mt-${topLabel ? '1' : '4'} sm:mt-${topLabel ? '1' : '5'}
-          rounded-lg overflow-hidden
-          ${size === 'md' ? 'min-h-[72px] sm:min-h-[110px]' : ''}
-          ${isSelected ? 'bg-mint/5' : 'bg-white/[0.03]'}
-          transition-colors duration-200
-        `}
-        style={size !== 'md' ? { minHeight: illoMinH[size] } : undefined}
-      >
-        {/* Subtle radial glow behind illustration */}
-        {isSelected && (
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,211,149,0.08),transparent_70%)]" />
-        )}
-        <div className="relative w-full h-full flex items-center justify-center p-2 sm:p-4">
-          {illustration}
-        </div>
-      </div>
-
-      {/* ── Divider ──────────────────────────────────────── */}
-      <div className={`mx-3 sm:mx-4 my-2 sm:my-3 border-t ${isSelected ? 'border-mint/25' : 'border-white/8'} transition-colors duration-200`} />
-
-      {/* ── Label / text area ─────────────────────────── */}
-      <div className="px-3 sm:px-4 pb-4 sm:pb-6 flex-shrink-0">
+      {/* ── Label copy ───────────────────────────────────── */}
+      <div className="flex-shrink-0">
         {label}
       </div>
     </motion.div>
